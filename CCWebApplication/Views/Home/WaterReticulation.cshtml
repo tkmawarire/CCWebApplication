@@ -1,0 +1,23 @@
+﻿
+@{
+    ViewBag.Title = "GCC-Water Reticulation";
+    Layout = "~/Views/Shared/_MapLayout.cshtml";
+}
+<div class="container-fluid body-content" id="map"></div>
+
+<script src="~/Scripts/data/exp_wHydrants.js"></script>
+<script src="~/Scripts/data/exp_wLiteralLine.js"></script>
+<script src="~/Scripts/data/exp_wMainLine.js"></script>
+<script src="~/Scripts/data/exp_wServiceConnections.js"></script>
+<script src="~/Scripts/data/exp_wWindsorPark.js"></script>
+
+<script>
+    var wWindsorPark = "@Url.Action("wWindsorPark", "Home")";
+    var wMainLine = "@Url.Action("wMainLine", "Home")";
+    var wLiteralLine = "@Url.Action("wLiteralLine", "Home")";
+    var wHydrants = "@Url.Action("wHydrants", "Home")";
+    var wValves = "@Url.Action("wValves", "Home")";
+    var wServiceConnection = "@Url.Action("wServiceConnection", "Home")";
+</script>
+<script src="~/Scripts/water.reticulation.js"></script>
+

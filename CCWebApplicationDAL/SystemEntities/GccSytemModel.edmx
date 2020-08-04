@@ -1,0 +1,1063 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="GccSytemModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="bulkmeters">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Point" Type="nvarchar" MaxLength="255" />
+          <Property Name="latitude" Type="float" />
+          <Property Name="longitude" Type="float" />
+          <Property Name="Height" Type="float" />
+          <Property Name="geom" Type="geometry" />
+        </EntityType>
+        <EntityType Name="hydrants">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Point" Type="nvarchar" MaxLength="255" />
+          <Property Name="latitude" Type="float" />
+          <Property Name="longitude" Type="float" />
+          <Property Name="Height" Type="float" />
+          <Property Name="geom" Type="geometry" />
+        </EntityType>
+        <EntityType Name="leakages">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Latitude" Type="float" />
+          <Property Name="Longitude" Type="float" />
+          <Property Name="Height" Type="float" />
+          <Property Name="Source" Type="nvarchar" MaxLength="255" />
+          <Property Name="townshipid" Type="bigint" />
+          <Property Name="XCOORD" Type="float" />
+          <Property Name="YCOORD" Type="float" />
+          <Property Name="Point" Type="nvarchar" MaxLength="255" />
+          <Property Name="geom" Type="geometry" />
+        </EntityType>
+        <EntityType Name="manholes">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Point" Type="nvarchar" MaxLength="255" />
+          <Property Name="latitude" Type="float" />
+          <Property Name="longitude" Type="float" />
+          <Property Name="Height" Type="float" />
+          <Property Name="geom" Type="geometry" />
+        </EntityType>
+        <EntityType Name="provinces">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PROVINCE" Type="nvarchar" MaxLength="255" />
+          <Property Name="PROV_CODE" Type="int" />
+          <Property Name="geom" Type="geometry" />
+          <Property Name="wkt" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="watervalves">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Point" Type="nvarchar" MaxLength="255" />
+          <Property Name="latitude" Type="float" />
+          <Property Name="longitude" Type="float" />
+          <Property Name="Height" Type="float" />
+          <Property Name="size" Type="nvarchar" MaxLength="255" />
+          <Property Name="geom" Type="geometry" />
+        </EntityType>
+        <EntityType Name="wMainLine">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FID_" Type="bigint" />
+          <Property Name="Entity" Type="nvarchar" MaxLength="255" />
+          <Property Name="Layer" Type="nvarchar" MaxLength="255" />
+          <Property Name="Color" Type="int" />
+          <Property Name="Linetype" Type="nvarchar" MaxLength="255" />
+          <Property Name="Elevation" Type="float" />
+          <Property Name="LineWt" Type="int" />
+          <Property Name="RefName" Type="nvarchar" MaxLength="255" />
+          <Property Name="pipeid" Type="nvarchar" MaxLength="255" />
+          <Property Name="dimension" Type="bigint" />
+          <Property Name="valveid" Type="nvarchar" MaxLength="255" />
+          <Property Name="endvalveid" Type="nvarchar" MaxLength="255" />
+          <Property Name="geom" Type="geometry" />
+        </EntityType>
+        <EntityType Name="zimcities">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CITY_ID" Type="bigint" />
+          <Property Name="CITY_NAME" Type="nvarchar" MaxLength="255" />
+          <Property Name="PROVINCE" Type="nvarchar" MaxLength="255" />
+          <Property Name="DISTRICT" Type="nvarchar" MaxLength="255" />
+          <Property Name="POPULATION" Type="bigint" />
+          <Property Name="POPU_M" Type="bigint" />
+          <Property Name="POPU_F" Type="bigint" />
+          <Property Name="AREA" Type="float" />
+          <Property Name="PERIMETER" Type="float" />
+          <Property Name="PROV_CODE" Type="bigint" />
+          <Property Name="geom" Type="geometry" />
+        </EntityType>
+        <EntityType Name="zimprovinces">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PROVINCE" Type="nvarchar" MaxLength="255" />
+          <Property Name="PROV_CODE" Type="bigint" />
+          <Property Name="AREA" Type="float" />
+          <Property Name="PERIMETER" Type="float" />
+          <Property Name="geom" Type="geometry" />
+        </EntityType>
+        <EntityType Name="zimstands">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="standid" Type="nvarchar" MaxLength="255" />
+          <Property Name="cityid" Type="bigint" />
+          <Property Name="standtype" Type="bigint" />
+          <Property Name="township" Type="nvarchar" MaxLength="255" />
+          <Property Name="townshipid" Type="nvarchar" MaxLength="255" />
+          <Property Name="geom" Type="geometry" />
+        </EntityType>
+        <EntityType Name="zimtownships">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="255" />
+          <Property Name="SHAPE_Leng" Type="float" />
+          <Property Name="SHAPE_Area" Type="float" />
+          <Property Name="cityid" Type="bigint" />
+          <Property Name="townshipid" Type="bigint" />
+          <Property Name="geom" Type="geometry" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'GCCWaterAudit-2016.dbo.vwAccountsMkobaMatch' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vwAccountsMkobaMatch">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="CurrentPayment" />
+            <PropertyRef Name="TOTAL" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="Account" Type="varchar" MaxLength="50" />
+          <Property Name="CurrentPayment" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="TOTAL" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Dept" Type="varchar" MaxLength="50" />
+          <Property Name="Cons Code" Type="varchar" MaxLength="50" />
+          <Property Name="Active" Type="varchar" MaxLength="50" />
+          <Property Name="Name" Type="varchar" MaxLength="50" />
+          <Property Name="TOWNSHIPID" Type="varchar" MaxLength="50" />
+          <Property Name="STANDID" Type="varchar" MaxLength="50" />
+          <Property Name="METER_NUMBER" Type="varchar(max)" />
+          <Property Name="READING" Type="varchar" MaxLength="50" />
+          <Property Name="CONDITION" Type="varchar" MaxLength="50" />
+          <Property Name="RESIDENTS" Type="varchar" MaxLength="50" />
+          <Property Name="WATER_SOURCE" Type="varchar" MaxLength="50" />
+          <Property Name="ILLEGAL_CONNECTION " Type="varchar" MaxLength="50" />
+          <Property Name="BURST_PIPES  " Type="varchar" MaxLength="50" />
+          <Property Name="TOILET_SEATS " Type="varchar" MaxLength="50" />
+          <Property Name="geom" Type="geometry" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'GCCWaterAudit-2016.dbo.vwFinanceGridCoordinates' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vwFinanceGridCoordinates">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="CurrentPayment" />
+            <PropertyRef Name="TOTAL" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="Account" Type="varchar" MaxLength="50" />
+          <Property Name="CurrentPayment" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="TOTAL" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Dept" Type="varchar" MaxLength="50" />
+          <Property Name="Cons Code" Type="varchar" MaxLength="50" />
+          <Property Name="Active" Type="varchar" MaxLength="50" />
+          <Property Name="Name" Type="varchar" MaxLength="50" />
+          <Property Name="TOWNSHIPID" Type="varchar" MaxLength="50" />
+          <Property Name="STANDID" Type="varchar" MaxLength="50" />
+          <Property Name="METER_NUMBER" Type="varchar(max)" />
+          <Property Name="READING" Type="varchar" MaxLength="50" />
+          <Property Name="CONDITION" Type="varchar" MaxLength="50" />
+          <Property Name="RESIDENTS" Type="varchar" MaxLength="50" />
+          <Property Name="WATER_SOURCE" Type="varchar" MaxLength="50" />
+          <Property Name="ILLEGAL_CONNECTION " Type="varchar" MaxLength="50" />
+          <Property Name="BURST_PIPES  " Type="varchar" MaxLength="50" />
+          <Property Name="TOILET_SEATS " Type="varchar" MaxLength="50" />
+          <Property Name="xCoordinate" Type="float" />
+          <Property Name="yCoordinate" Type="float" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'GCCWaterAudit-2016.dbo.vwleakageTown' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vwleakageTown">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="townshipid" Type="bigint" />
+          <Property Name="Latitude" Type="float" />
+          <Property Name="Longitude" Type="float" />
+          <Property Name="Source" Type="nvarchar" MaxLength="255" />
+          <Property Name="Point" Type="nvarchar" MaxLength="255" />
+          <Property Name="Name" Type="nvarchar" MaxLength="255" />
+          <Property Name="id" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'GCCWaterAudit-2016.dbo.vwMkobaMatchingGrid' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vwMkobaMatchingGrid">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="CurrentPayment" />
+            <PropertyRef Name="TOTAL" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="Account" Type="varchar" MaxLength="50" />
+          <Property Name="CurrentPayment" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="TOTAL" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Dept" Type="varchar" MaxLength="50" />
+          <Property Name="Cons Code" Type="varchar" MaxLength="50" />
+          <Property Name="Active" Type="varchar" MaxLength="50" />
+          <Property Name="Name" Type="varchar" MaxLength="50" />
+          <Property Name="TOWNSHIPID" Type="varchar" MaxLength="50" />
+          <Property Name="STANDID" Type="varchar" MaxLength="50" />
+          <Property Name="METER_NUMBER" Type="varchar(max)" />
+          <Property Name="READING" Type="varchar" MaxLength="50" />
+          <Property Name="CONDITION" Type="varchar" MaxLength="50" />
+          <Property Name="RESIDENTS" Type="varchar" MaxLength="50" />
+          <Property Name="WATER_SOURCE" Type="varchar" MaxLength="50" />
+          <Property Name="ILLEGAL_CONNECTION " Type="varchar" MaxLength="50" />
+          <Property Name="BURST_PIPES  " Type="varchar" MaxLength="50" />
+          <Property Name="TOILET_SEATS " Type="varchar" MaxLength="50" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'GCCWaterAudit-2016.dbo.vwStands' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vwStands">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="ACCOUNT NAME" Type="varchar" MaxLength="50" />
+          <Property Name="ACC_NUMBER" Type="varchar" MaxLength="50" />
+          <Property Name="ADDRESS" Type="varchar" MaxLength="50" />
+          <Property Name="METER_NUMBER" Type="varchar(max)" />
+          <Property Name="READING" Type="varchar" MaxLength="50" />
+          <Property Name="STANDID" Type="varchar" MaxLength="50" />
+          <Property Name="CONDITION" Type="varchar" MaxLength="50" />
+          <Property Name="RESIDENTS" Type="varchar" MaxLength="50" />
+          <Property Name="WATER_SOURCE" Type="varchar" MaxLength="50" />
+          <Property Name="ILLEGAL_CONNECTION " Type="varchar" MaxLength="50" />
+          <Property Name="BURST_PIPES  " Type="varchar" MaxLength="50" />
+          <Property Name="TOILET_SEATS " Type="varchar" MaxLength="50" />
+          <Property Name="township" Type="nvarchar" MaxLength="255" />
+          <Property Name="townshipid" Type="nvarchar" MaxLength="255" />
+          <Property Name="geom" Type="geometry" />
+          <Property Name="standtype" Type="bigint" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'GCCWaterAudit-2016.dbo.vwZimStandsWKT' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vwZimStandsWKT">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="CurrentPayment" />
+            <PropertyRef Name="TOTAL" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="Account" Type="varchar" MaxLength="50" />
+          <Property Name="CurrentPayment" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="TOTAL" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Dept" Type="varchar" MaxLength="50" />
+          <Property Name="Cons Code" Type="varchar" MaxLength="50" />
+          <Property Name="Active" Type="varchar" MaxLength="50" />
+          <Property Name="Name" Type="varchar" MaxLength="50" />
+          <Property Name="TOWNSHIPID" Type="varchar" MaxLength="50" />
+          <Property Name="STANDID" Type="varchar" MaxLength="50" />
+          <Property Name="METER_NUMBER" Type="varchar(max)" />
+          <Property Name="READING" Type="varchar" MaxLength="50" />
+          <Property Name="CONDITION" Type="varchar" MaxLength="50" />
+          <Property Name="RESIDENTS" Type="varchar" MaxLength="50" />
+          <Property Name="WATER_SOURCE" Type="varchar" MaxLength="50" />
+          <Property Name="ILLEGAL_CONNECTION " Type="varchar" MaxLength="50" />
+          <Property Name="BURST_PIPES  " Type="varchar" MaxLength="50" />
+          <Property Name="TOILET_SEATS " Type="varchar" MaxLength="50" />
+          <Property Name="xCoordinate" Type="float" />
+          <Property Name="yCoordinate" Type="float" />
+          <Property Name="wkt" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityContainer Name="GccSytemModelStoreContainer">
+          <EntitySet Name="bulkmeters" EntityType="Self.bulkmeters" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="hydrants" EntityType="Self.hydrants" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="leakages" EntityType="Self.leakages" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="manholes" EntityType="Self.manholes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="provinces" EntityType="Self.provinces" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="watervalves" EntityType="Self.watervalves" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="wMainLine" EntityType="Self.wMainLine" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="zimcities" EntityType="Self.zimcities" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="zimprovinces" EntityType="Self.zimprovinces" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="zimstands" EntityType="Self.zimstands" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="zimtownships" EntityType="Self.zimtownships" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="vwAccountsMkobaMatch" EntityType="Self.vwAccountsMkobaMatch" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vwAccountsMkobaMatch].[id] AS [id], 
+    [vwAccountsMkobaMatch].[Account] AS [Account], 
+    [vwAccountsMkobaMatch].[CurrentPayment] AS [CurrentPayment], 
+    [vwAccountsMkobaMatch].[TOTAL] AS [TOTAL], 
+    [vwAccountsMkobaMatch].[Dept] AS [Dept], 
+    [vwAccountsMkobaMatch].[Cons Code] AS [Cons Code], 
+    [vwAccountsMkobaMatch].[Active] AS [Active], 
+    [vwAccountsMkobaMatch].[Name] AS [Name], 
+    [vwAccountsMkobaMatch].[TOWNSHIPID] AS [TOWNSHIPID], 
+    [vwAccountsMkobaMatch].[STANDID] AS [STANDID], 
+    [vwAccountsMkobaMatch].[METER_NUMBER] AS [METER_NUMBER], 
+    [vwAccountsMkobaMatch].[READING] AS [READING], 
+    [vwAccountsMkobaMatch].[CONDITION] AS [CONDITION], 
+    [vwAccountsMkobaMatch].[RESIDENTS] AS [RESIDENTS], 
+    [vwAccountsMkobaMatch].[WATER_SOURCE] AS [WATER_SOURCE], 
+    [vwAccountsMkobaMatch].[ILLEGAL_CONNECTION ] AS [ILLEGAL_CONNECTION ], 
+    [vwAccountsMkobaMatch].[BURST_PIPES  ] AS [BURST_PIPES  ], 
+    [vwAccountsMkobaMatch].[TOILET_SEATS ] AS [TOILET_SEATS ], 
+    [vwAccountsMkobaMatch].[geom] AS [geom]
+    FROM [dbo].[vwAccountsMkobaMatch] AS [vwAccountsMkobaMatch]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vwFinanceGridCoordinates" EntityType="Self.vwFinanceGridCoordinates" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vwFinanceGridCoordinates].[id] AS [id], 
+    [vwFinanceGridCoordinates].[Account] AS [Account], 
+    [vwFinanceGridCoordinates].[CurrentPayment] AS [CurrentPayment], 
+    [vwFinanceGridCoordinates].[TOTAL] AS [TOTAL], 
+    [vwFinanceGridCoordinates].[Dept] AS [Dept], 
+    [vwFinanceGridCoordinates].[Cons Code] AS [Cons Code], 
+    [vwFinanceGridCoordinates].[Active] AS [Active], 
+    [vwFinanceGridCoordinates].[Name] AS [Name], 
+    [vwFinanceGridCoordinates].[TOWNSHIPID] AS [TOWNSHIPID], 
+    [vwFinanceGridCoordinates].[STANDID] AS [STANDID], 
+    [vwFinanceGridCoordinates].[METER_NUMBER] AS [METER_NUMBER], 
+    [vwFinanceGridCoordinates].[READING] AS [READING], 
+    [vwFinanceGridCoordinates].[CONDITION] AS [CONDITION], 
+    [vwFinanceGridCoordinates].[RESIDENTS] AS [RESIDENTS], 
+    [vwFinanceGridCoordinates].[WATER_SOURCE] AS [WATER_SOURCE], 
+    [vwFinanceGridCoordinates].[ILLEGAL_CONNECTION ] AS [ILLEGAL_CONNECTION ], 
+    [vwFinanceGridCoordinates].[BURST_PIPES  ] AS [BURST_PIPES  ], 
+    [vwFinanceGridCoordinates].[TOILET_SEATS ] AS [TOILET_SEATS ], 
+    [vwFinanceGridCoordinates].[xCoordinate] AS [xCoordinate], 
+    [vwFinanceGridCoordinates].[yCoordinate] AS [yCoordinate]
+    FROM [dbo].[vwFinanceGridCoordinates] AS [vwFinanceGridCoordinates]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vwleakageTown" EntityType="Self.vwleakageTown" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vwleakageTown].[townshipid] AS [townshipid], 
+    [vwleakageTown].[Latitude] AS [Latitude], 
+    [vwleakageTown].[Longitude] AS [Longitude], 
+    [vwleakageTown].[Source] AS [Source], 
+    [vwleakageTown].[Point] AS [Point], 
+    [vwleakageTown].[Name] AS [Name], 
+    [vwleakageTown].[id] AS [id]
+    FROM [dbo].[vwleakageTown] AS [vwleakageTown]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vwMkobaMatchingGrid" EntityType="Self.vwMkobaMatchingGrid" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vwMkobaMatchingGrid].[id] AS [id], 
+    [vwMkobaMatchingGrid].[Account] AS [Account], 
+    [vwMkobaMatchingGrid].[CurrentPayment] AS [CurrentPayment], 
+    [vwMkobaMatchingGrid].[TOTAL] AS [TOTAL], 
+    [vwMkobaMatchingGrid].[Dept] AS [Dept], 
+    [vwMkobaMatchingGrid].[Cons Code] AS [Cons Code], 
+    [vwMkobaMatchingGrid].[Active] AS [Active], 
+    [vwMkobaMatchingGrid].[Name] AS [Name], 
+    [vwMkobaMatchingGrid].[TOWNSHIPID] AS [TOWNSHIPID], 
+    [vwMkobaMatchingGrid].[STANDID] AS [STANDID], 
+    [vwMkobaMatchingGrid].[METER_NUMBER] AS [METER_NUMBER], 
+    [vwMkobaMatchingGrid].[READING] AS [READING], 
+    [vwMkobaMatchingGrid].[CONDITION] AS [CONDITION], 
+    [vwMkobaMatchingGrid].[RESIDENTS] AS [RESIDENTS], 
+    [vwMkobaMatchingGrid].[WATER_SOURCE] AS [WATER_SOURCE], 
+    [vwMkobaMatchingGrid].[ILLEGAL_CONNECTION ] AS [ILLEGAL_CONNECTION ], 
+    [vwMkobaMatchingGrid].[BURST_PIPES  ] AS [BURST_PIPES  ], 
+    [vwMkobaMatchingGrid].[TOILET_SEATS ] AS [TOILET_SEATS ]
+    FROM [dbo].[vwMkobaMatchingGrid] AS [vwMkobaMatchingGrid]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vwStands" EntityType="Self.vwStands" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vwStands].[ID] AS [ID], 
+    [vwStands].[ACCOUNT NAME] AS [ACCOUNT NAME], 
+    [vwStands].[ACC_NUMBER] AS [ACC_NUMBER], 
+    [vwStands].[ADDRESS] AS [ADDRESS], 
+    [vwStands].[METER_NUMBER] AS [METER_NUMBER], 
+    [vwStands].[READING] AS [READING], 
+    [vwStands].[STANDID] AS [STANDID], 
+    [vwStands].[CONDITION] AS [CONDITION], 
+    [vwStands].[RESIDENTS] AS [RESIDENTS], 
+    [vwStands].[WATER_SOURCE] AS [WATER_SOURCE], 
+    [vwStands].[ILLEGAL_CONNECTION ] AS [ILLEGAL_CONNECTION ], 
+    [vwStands].[BURST_PIPES  ] AS [BURST_PIPES  ], 
+    [vwStands].[TOILET_SEATS ] AS [TOILET_SEATS ], 
+    [vwStands].[township] AS [township], 
+    [vwStands].[townshipid] AS [townshipid], 
+    [vwStands].[geom] AS [geom], 
+    [vwStands].[standtype] AS [standtype]
+    FROM [dbo].[vwStands] AS [vwStands]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vwZimStandsWKT" EntityType="Self.vwZimStandsWKT" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vwZimStandsWKT].[id] AS [id], 
+    [vwZimStandsWKT].[Account] AS [Account], 
+    [vwZimStandsWKT].[CurrentPayment] AS [CurrentPayment], 
+    [vwZimStandsWKT].[TOTAL] AS [TOTAL], 
+    [vwZimStandsWKT].[Dept] AS [Dept], 
+    [vwZimStandsWKT].[Cons Code] AS [Cons Code], 
+    [vwZimStandsWKT].[Active] AS [Active], 
+    [vwZimStandsWKT].[Name] AS [Name], 
+    [vwZimStandsWKT].[TOWNSHIPID] AS [TOWNSHIPID], 
+    [vwZimStandsWKT].[STANDID] AS [STANDID], 
+    [vwZimStandsWKT].[METER_NUMBER] AS [METER_NUMBER], 
+    [vwZimStandsWKT].[READING] AS [READING], 
+    [vwZimStandsWKT].[CONDITION] AS [CONDITION], 
+    [vwZimStandsWKT].[RESIDENTS] AS [RESIDENTS], 
+    [vwZimStandsWKT].[WATER_SOURCE] AS [WATER_SOURCE], 
+    [vwZimStandsWKT].[ILLEGAL_CONNECTION ] AS [ILLEGAL_CONNECTION ], 
+    [vwZimStandsWKT].[BURST_PIPES  ] AS [BURST_PIPES  ], 
+    [vwZimStandsWKT].[TOILET_SEATS ] AS [TOILET_SEATS ], 
+    [vwZimStandsWKT].[xCoordinate] AS [xCoordinate], 
+    [vwZimStandsWKT].[yCoordinate] AS [yCoordinate], 
+    [vwZimStandsWKT].[wkt] AS [wkt]
+    FROM [dbo].[vwZimStandsWKT] AS [vwZimStandsWKT]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="GccSytemModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="bulkmeter">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Point" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="latitude" Type="Double" />
+          <Property Name="longitude" Type="Double" />
+          <Property Name="Height" Type="Double" />
+          <Property Name="geom" Type="Geometry" />
+        </EntityType>
+        <EntityType Name="hydrant">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Point" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="latitude" Type="Double" />
+          <Property Name="longitude" Type="Double" />
+          <Property Name="Height" Type="Double" />
+          <Property Name="geom" Type="Geometry" />
+        </EntityType>
+        <EntityType Name="leakage">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Latitude" Type="Double" />
+          <Property Name="Longitude" Type="Double" />
+          <Property Name="Height" Type="Double" />
+          <Property Name="Source" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="townshipid" Type="Int64" />
+          <Property Name="XCOORD" Type="Double" />
+          <Property Name="YCOORD" Type="Double" />
+          <Property Name="Point" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="geom" Type="Geometry" />
+        </EntityType>
+        <EntityType Name="manhole">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Point" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="latitude" Type="Double" />
+          <Property Name="longitude" Type="Double" />
+          <Property Name="Height" Type="Double" />
+          <Property Name="geom" Type="Geometry" />
+        </EntityType>
+        <EntityType Name="province">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PROVINCE1" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="PROV_CODE" Type="Int32" />
+          <Property Name="geom" Type="Geometry" />
+          <Property Name="wkt" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="watervalf">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Point" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="latitude" Type="Double" />
+          <Property Name="longitude" Type="Double" />
+          <Property Name="Height" Type="Double" />
+          <Property Name="size" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="geom" Type="Geometry" />
+        </EntityType>
+        <EntityType Name="zimcity">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CITY_ID" Type="Int64" />
+          <Property Name="CITY_NAME" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="PROVINCE" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="DISTRICT" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="POPULATION" Type="Int64" />
+          <Property Name="POPU_M" Type="Int64" />
+          <Property Name="POPU_F" Type="Int64" />
+          <Property Name="AREA" Type="Double" />
+          <Property Name="PERIMETER" Type="Double" />
+          <Property Name="PROV_CODE" Type="Int64" />
+          <Property Name="geom" Type="Geometry" />
+        </EntityType>
+        <EntityType Name="zimprovince">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PROVINCE" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="PROV_CODE" Type="Int64" />
+          <Property Name="AREA" Type="Double" />
+          <Property Name="PERIMETER" Type="Double" />
+          <Property Name="geom" Type="Geometry" />
+        </EntityType>
+        <EntityType Name="zimtownship">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="SHAPE_Leng" Type="Double" />
+          <Property Name="SHAPE_Area" Type="Double" />
+          <Property Name="cityid" Type="Int64" />
+          <Property Name="townshipid" Type="Int64" />
+          <Property Name="geom" Type="Geometry" />
+        </EntityType>
+        <EntityType Name="vwStand">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="ACCOUNT_NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ACC_NUMBER" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ADDRESS" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="METER_NUMBER" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="READING" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="STANDID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CONDITION" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="RESIDENTS" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="WATER_SOURCE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ILLEGAL_CONNECTION_" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="BURST_PIPES__" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TOILET_SEATS_" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="township" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="townshipid" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="geom" Type="Geometry" />
+          <Property Name="standtype" Type="Int64" />
+        </EntityType>
+        <EntityContainer Name="GccSytemEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="bulkmeters" EntityType="Self.bulkmeter" />
+          <EntitySet Name="hydrants" EntityType="Self.hydrant" />
+          <EntitySet Name="leakages" EntityType="Self.leakage" />
+          <EntitySet Name="manholes" EntityType="Self.manhole" />
+          <EntitySet Name="provinces" EntityType="Self.province" />
+          <EntitySet Name="watervalves" EntityType="Self.watervalf" />
+          <EntitySet Name="zimcities" EntityType="Self.zimcity" />
+          <EntitySet Name="zimprovinces" EntityType="Self.zimprovince" />
+          <EntitySet Name="zimtownships" EntityType="Self.zimtownship" />
+          <EntitySet Name="vwStands" EntityType="Self.vwStand" />
+          <EntitySet Name="vwleakageTowns" EntityType="GccSytemModel.vwleakageTown" />
+          <EntitySet Name="zimstands" EntityType="GccSytemModel.zimstand" />
+          <EntitySet Name="vwAccountsMkobaMatches" EntityType="GccSytemModel.vwAccountsMkobaMatch" />
+          <EntitySet Name="wMainLines" EntityType="GccSytemModel.wMainLine" />
+          <EntitySet Name="vwMkobaMatchingGrids" EntityType="GccSytemModel.vwMkobaMatchingGrid" />
+          <EntitySet Name="vwFinanceGridCoordinates" EntityType="GccSytemModel.vwFinanceGridCoordinate" />
+          <EntitySet Name="vwZimStandsWKTs" EntityType="GccSytemModel.vwZimStandsWKT" />
+        </EntityContainer>
+        <EntityType Name="vwleakageTown">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="townshipid" Type="Int64" />
+          <Property Name="Latitude" Type="Double" />
+          <Property Name="Longitude" Type="Double" />
+          <Property Name="Source" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Point" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="id" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="zimstand">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="standid" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="cityid" Type="Int64" />
+          <Property Name="standtype" Type="Int64" />
+          <Property Name="township" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="townshipid" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="geom" Type="Geometry" />
+        </EntityType>
+        <EntityType Name="vwAccountsMkobaMatch">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="CurrentPayment" />
+            <PropertyRef Name="TOTAL" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="Account" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CurrentPayment" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="TOTAL" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Dept" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Cons_Code" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Active" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TOWNSHIPID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="STANDID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="METER_NUMBER" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="READING" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CONDITION" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="RESIDENTS" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="WATER_SOURCE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ILLEGAL_CONNECTION_" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="BURST_PIPES__" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TOILET_SEATS_" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="geom" Type="Geometry" />
+        </EntityType>
+        <EntityType Name="wMainLine">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FID_" Type="Int64" />
+          <Property Name="Entity" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Layer" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Color" Type="Int32" />
+          <Property Name="Linetype" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Elevation" Type="Double" />
+          <Property Name="LineWt" Type="Int32" />
+          <Property Name="RefName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="pipeid" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="dimension" Type="Int64" />
+          <Property Name="valveid" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="endvalveid" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="geom" Type="Geometry" />
+        </EntityType>
+        <EntityType Name="vwMkobaMatchingGrid">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="CurrentPayment" />
+            <PropertyRef Name="TOTAL" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="Account" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CurrentPayment" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="TOTAL" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Dept" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Cons_Code" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Active" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TOWNSHIPID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="STANDID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="METER_NUMBER" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="READING" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CONDITION" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="RESIDENTS" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="WATER_SOURCE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ILLEGAL_CONNECTION_" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="BURST_PIPES__" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TOILET_SEATS_" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="vwFinanceGridCoordinate">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="CurrentPayment" />
+            <PropertyRef Name="TOTAL" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="Account" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CurrentPayment" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="TOTAL" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Dept" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Cons_Code" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Active" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TOWNSHIPID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="STANDID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="METER_NUMBER" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="READING" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CONDITION" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="RESIDENTS" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="WATER_SOURCE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ILLEGAL_CONNECTION_" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="BURST_PIPES__" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TOILET_SEATS_" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="xCoordinate" Type="Double" />
+          <Property Name="yCoordinate" Type="Double" />
+        </EntityType>
+        <EntityType Name="vwZimStandsWKT">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="CurrentPayment" />
+            <PropertyRef Name="TOTAL" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="Account" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CurrentPayment" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="TOTAL" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Dept" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Cons_Code" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Active" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TOWNSHIPID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="STANDID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="METER_NUMBER" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="READING" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CONDITION" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="RESIDENTS" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="WATER_SOURCE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ILLEGAL_CONNECTION_" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="BURST_PIPES__" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TOILET_SEATS_" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="xCoordinate" Type="Double" />
+          <Property Name="yCoordinate" Type="Double" />
+          <Property Name="wkt" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="GccSytemModelStoreContainer" CdmEntityContainer="GccSytemEntities">
+          <EntitySetMapping Name="bulkmeters">
+            <EntityTypeMapping TypeName="GccSytemModel.bulkmeter">
+              <MappingFragment StoreEntitySet="bulkmeters">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Point" ColumnName="Point" />
+                <ScalarProperty Name="latitude" ColumnName="latitude" />
+                <ScalarProperty Name="longitude" ColumnName="longitude" />
+                <ScalarProperty Name="Height" ColumnName="Height" />
+                <ScalarProperty Name="geom" ColumnName="geom" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="hydrants">
+            <EntityTypeMapping TypeName="GccSytemModel.hydrant">
+              <MappingFragment StoreEntitySet="hydrants">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Point" ColumnName="Point" />
+                <ScalarProperty Name="latitude" ColumnName="latitude" />
+                <ScalarProperty Name="longitude" ColumnName="longitude" />
+                <ScalarProperty Name="Height" ColumnName="Height" />
+                <ScalarProperty Name="geom" ColumnName="geom" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="leakages">
+            <EntityTypeMapping TypeName="GccSytemModel.leakage">
+              <MappingFragment StoreEntitySet="leakages">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+                <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+                <ScalarProperty Name="Height" ColumnName="Height" />
+                <ScalarProperty Name="Source" ColumnName="Source" />
+                <ScalarProperty Name="townshipid" ColumnName="townshipid" />
+                <ScalarProperty Name="XCOORD" ColumnName="XCOORD" />
+                <ScalarProperty Name="YCOORD" ColumnName="YCOORD" />
+                <ScalarProperty Name="Point" ColumnName="Point" />
+                <ScalarProperty Name="geom" ColumnName="geom" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="manholes">
+            <EntityTypeMapping TypeName="GccSytemModel.manhole">
+              <MappingFragment StoreEntitySet="manholes">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Point" ColumnName="Point" />
+                <ScalarProperty Name="latitude" ColumnName="latitude" />
+                <ScalarProperty Name="longitude" ColumnName="longitude" />
+                <ScalarProperty Name="Height" ColumnName="Height" />
+                <ScalarProperty Name="geom" ColumnName="geom" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="provinces">
+            <EntityTypeMapping TypeName="GccSytemModel.province">
+              <MappingFragment StoreEntitySet="provinces">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="PROVINCE1" ColumnName="PROVINCE" />
+                <ScalarProperty Name="PROV_CODE" ColumnName="PROV_CODE" />
+                <ScalarProperty Name="geom" ColumnName="geom" />
+                <ScalarProperty Name="wkt" ColumnName="wkt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="watervalves">
+            <EntityTypeMapping TypeName="GccSytemModel.watervalf">
+              <MappingFragment StoreEntitySet="watervalves">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Point" ColumnName="Point" />
+                <ScalarProperty Name="latitude" ColumnName="latitude" />
+                <ScalarProperty Name="longitude" ColumnName="longitude" />
+                <ScalarProperty Name="Height" ColumnName="Height" />
+                <ScalarProperty Name="size" ColumnName="size" />
+                <ScalarProperty Name="geom" ColumnName="geom" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="zimcities">
+            <EntityTypeMapping TypeName="GccSytemModel.zimcity">
+              <MappingFragment StoreEntitySet="zimcities">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="CITY_ID" ColumnName="CITY_ID" />
+                <ScalarProperty Name="CITY_NAME" ColumnName="CITY_NAME" />
+                <ScalarProperty Name="PROVINCE" ColumnName="PROVINCE" />
+                <ScalarProperty Name="DISTRICT" ColumnName="DISTRICT" />
+                <ScalarProperty Name="POPULATION" ColumnName="POPULATION" />
+                <ScalarProperty Name="POPU_M" ColumnName="POPU_M" />
+                <ScalarProperty Name="POPU_F" ColumnName="POPU_F" />
+                <ScalarProperty Name="AREA" ColumnName="AREA" />
+                <ScalarProperty Name="PERIMETER" ColumnName="PERIMETER" />
+                <ScalarProperty Name="PROV_CODE" ColumnName="PROV_CODE" />
+                <ScalarProperty Name="geom" ColumnName="geom" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="zimprovinces">
+            <EntityTypeMapping TypeName="GccSytemModel.zimprovince">
+              <MappingFragment StoreEntitySet="zimprovinces">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="PROVINCE" ColumnName="PROVINCE" />
+                <ScalarProperty Name="PROV_CODE" ColumnName="PROV_CODE" />
+                <ScalarProperty Name="AREA" ColumnName="AREA" />
+                <ScalarProperty Name="PERIMETER" ColumnName="PERIMETER" />
+                <ScalarProperty Name="geom" ColumnName="geom" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="zimtownships">
+            <EntityTypeMapping TypeName="GccSytemModel.zimtownship">
+              <MappingFragment StoreEntitySet="zimtownships">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="SHAPE_Leng" ColumnName="SHAPE_Leng" />
+                <ScalarProperty Name="SHAPE_Area" ColumnName="SHAPE_Area" />
+                <ScalarProperty Name="cityid" ColumnName="cityid" />
+                <ScalarProperty Name="townshipid" ColumnName="townshipid" />
+                <ScalarProperty Name="geom" ColumnName="geom" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwStands">
+            <EntityTypeMapping TypeName="GccSytemModel.vwStand">
+              <MappingFragment StoreEntitySet="vwStands">
+                <ScalarProperty Name="standtype" ColumnName="standtype" />
+                <ScalarProperty Name="geom" ColumnName="geom" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ACCOUNT_NAME" ColumnName="ACCOUNT NAME" />
+                <ScalarProperty Name="ACC_NUMBER" ColumnName="ACC_NUMBER" />
+                <ScalarProperty Name="ADDRESS" ColumnName="ADDRESS" />
+                <ScalarProperty Name="METER_NUMBER" ColumnName="METER_NUMBER" />
+                <ScalarProperty Name="READING" ColumnName="READING" />
+                <ScalarProperty Name="STANDID" ColumnName="STANDID" />
+                <ScalarProperty Name="CONDITION" ColumnName="CONDITION" />
+                <ScalarProperty Name="RESIDENTS" ColumnName="RESIDENTS" />
+                <ScalarProperty Name="WATER_SOURCE" ColumnName="WATER_SOURCE" />
+                <ScalarProperty Name="ILLEGAL_CONNECTION_" ColumnName="ILLEGAL_CONNECTION " />
+                <ScalarProperty Name="BURST_PIPES__" ColumnName="BURST_PIPES  " />
+                <ScalarProperty Name="TOILET_SEATS_" ColumnName="TOILET_SEATS " />
+                <ScalarProperty Name="township" ColumnName="township" />
+                <ScalarProperty Name="townshipid" ColumnName="townshipid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwleakageTowns">
+            <EntityTypeMapping TypeName="GccSytemModel.vwleakageTown">
+              <MappingFragment StoreEntitySet="vwleakageTown">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Point" ColumnName="Point" />
+                <ScalarProperty Name="Source" ColumnName="Source" />
+                <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+                <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+                <ScalarProperty Name="townshipid" ColumnName="townshipid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="zimstands">
+            <EntityTypeMapping TypeName="GccSytemModel.zimstand">
+              <MappingFragment StoreEntitySet="zimstands">
+                <ScalarProperty Name="geom" ColumnName="geom" />
+                <ScalarProperty Name="townshipid" ColumnName="townshipid" />
+                <ScalarProperty Name="township" ColumnName="township" />
+                <ScalarProperty Name="standtype" ColumnName="standtype" />
+                <ScalarProperty Name="cityid" ColumnName="cityid" />
+                <ScalarProperty Name="standid" ColumnName="standid" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwAccountsMkobaMatches">
+            <EntityTypeMapping TypeName="GccSytemModel.vwAccountsMkobaMatch">
+              <MappingFragment StoreEntitySet="vwAccountsMkobaMatch">
+                <ScalarProperty Name="geom" ColumnName="geom" />
+                <ScalarProperty Name="TOILET_SEATS_" ColumnName="TOILET_SEATS " />
+                <ScalarProperty Name="BURST_PIPES__" ColumnName="BURST_PIPES  " />
+                <ScalarProperty Name="ILLEGAL_CONNECTION_" ColumnName="ILLEGAL_CONNECTION " />
+                <ScalarProperty Name="WATER_SOURCE" ColumnName="WATER_SOURCE" />
+                <ScalarProperty Name="RESIDENTS" ColumnName="RESIDENTS" />
+                <ScalarProperty Name="CONDITION" ColumnName="CONDITION" />
+                <ScalarProperty Name="READING" ColumnName="READING" />
+                <ScalarProperty Name="METER_NUMBER" ColumnName="METER_NUMBER" />
+                <ScalarProperty Name="STANDID" ColumnName="STANDID" />
+                <ScalarProperty Name="TOWNSHIPID" ColumnName="TOWNSHIPID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="Cons_Code" ColumnName="Cons Code" />
+                <ScalarProperty Name="Dept" ColumnName="Dept" />
+                <ScalarProperty Name="TOTAL" ColumnName="TOTAL" />
+                <ScalarProperty Name="CurrentPayment" ColumnName="CurrentPayment" />
+                <ScalarProperty Name="Account" ColumnName="Account" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="wMainLines">
+            <EntityTypeMapping TypeName="GccSytemModel.wMainLine">
+              <MappingFragment StoreEntitySet="wMainLine">
+                <ScalarProperty Name="geom" ColumnName="geom" />
+                <ScalarProperty Name="endvalveid" ColumnName="endvalveid" />
+                <ScalarProperty Name="valveid" ColumnName="valveid" />
+                <ScalarProperty Name="dimension" ColumnName="dimension" />
+                <ScalarProperty Name="pipeid" ColumnName="pipeid" />
+                <ScalarProperty Name="RefName" ColumnName="RefName" />
+                <ScalarProperty Name="LineWt" ColumnName="LineWt" />
+                <ScalarProperty Name="Elevation" ColumnName="Elevation" />
+                <ScalarProperty Name="Linetype" ColumnName="Linetype" />
+                <ScalarProperty Name="Color" ColumnName="Color" />
+                <ScalarProperty Name="Layer" ColumnName="Layer" />
+                <ScalarProperty Name="Entity" ColumnName="Entity" />
+                <ScalarProperty Name="FID_" ColumnName="FID_" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwMkobaMatchingGrids">
+            <EntityTypeMapping TypeName="GccSytemModel.vwMkobaMatchingGrid">
+              <MappingFragment StoreEntitySet="vwMkobaMatchingGrid">
+                <ScalarProperty Name="TOILET_SEATS_" ColumnName="TOILET_SEATS " />
+                <ScalarProperty Name="BURST_PIPES__" ColumnName="BURST_PIPES  " />
+                <ScalarProperty Name="ILLEGAL_CONNECTION_" ColumnName="ILLEGAL_CONNECTION " />
+                <ScalarProperty Name="WATER_SOURCE" ColumnName="WATER_SOURCE" />
+                <ScalarProperty Name="RESIDENTS" ColumnName="RESIDENTS" />
+                <ScalarProperty Name="CONDITION" ColumnName="CONDITION" />
+                <ScalarProperty Name="READING" ColumnName="READING" />
+                <ScalarProperty Name="METER_NUMBER" ColumnName="METER_NUMBER" />
+                <ScalarProperty Name="STANDID" ColumnName="STANDID" />
+                <ScalarProperty Name="TOWNSHIPID" ColumnName="TOWNSHIPID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="Cons_Code" ColumnName="Cons Code" />
+                <ScalarProperty Name="Dept" ColumnName="Dept" />
+                <ScalarProperty Name="TOTAL" ColumnName="TOTAL" />
+                <ScalarProperty Name="CurrentPayment" ColumnName="CurrentPayment" />
+                <ScalarProperty Name="Account" ColumnName="Account" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwFinanceGridCoordinates">
+            <EntityTypeMapping TypeName="GccSytemModel.vwFinanceGridCoordinate">
+              <MappingFragment StoreEntitySet="vwFinanceGridCoordinates">
+                <ScalarProperty Name="yCoordinate" ColumnName="yCoordinate" />
+                <ScalarProperty Name="xCoordinate" ColumnName="xCoordinate" />
+                <ScalarProperty Name="TOILET_SEATS_" ColumnName="TOILET_SEATS " />
+                <ScalarProperty Name="BURST_PIPES__" ColumnName="BURST_PIPES  " />
+                <ScalarProperty Name="ILLEGAL_CONNECTION_" ColumnName="ILLEGAL_CONNECTION " />
+                <ScalarProperty Name="WATER_SOURCE" ColumnName="WATER_SOURCE" />
+                <ScalarProperty Name="RESIDENTS" ColumnName="RESIDENTS" />
+                <ScalarProperty Name="CONDITION" ColumnName="CONDITION" />
+                <ScalarProperty Name="READING" ColumnName="READING" />
+                <ScalarProperty Name="METER_NUMBER" ColumnName="METER_NUMBER" />
+                <ScalarProperty Name="STANDID" ColumnName="STANDID" />
+                <ScalarProperty Name="TOWNSHIPID" ColumnName="TOWNSHIPID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="Cons_Code" ColumnName="Cons Code" />
+                <ScalarProperty Name="Dept" ColumnName="Dept" />
+                <ScalarProperty Name="TOTAL" ColumnName="TOTAL" />
+                <ScalarProperty Name="CurrentPayment" ColumnName="CurrentPayment" />
+                <ScalarProperty Name="Account" ColumnName="Account" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwZimStandsWKTs">
+            <EntityTypeMapping TypeName="GccSytemModel.vwZimStandsWKT">
+              <MappingFragment StoreEntitySet="vwZimStandsWKT">
+                <ScalarProperty Name="wkt" ColumnName="wkt" />
+                <ScalarProperty Name="yCoordinate" ColumnName="yCoordinate" />
+                <ScalarProperty Name="xCoordinate" ColumnName="xCoordinate" />
+                <ScalarProperty Name="TOILET_SEATS_" ColumnName="TOILET_SEATS " />
+                <ScalarProperty Name="BURST_PIPES__" ColumnName="BURST_PIPES  " />
+                <ScalarProperty Name="ILLEGAL_CONNECTION_" ColumnName="ILLEGAL_CONNECTION " />
+                <ScalarProperty Name="WATER_SOURCE" ColumnName="WATER_SOURCE" />
+                <ScalarProperty Name="RESIDENTS" ColumnName="RESIDENTS" />
+                <ScalarProperty Name="CONDITION" ColumnName="CONDITION" />
+                <ScalarProperty Name="READING" ColumnName="READING" />
+                <ScalarProperty Name="METER_NUMBER" ColumnName="METER_NUMBER" />
+                <ScalarProperty Name="STANDID" ColumnName="STANDID" />
+                <ScalarProperty Name="TOWNSHIPID" ColumnName="TOWNSHIPID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="Cons_Code" ColumnName="Cons Code" />
+                <ScalarProperty Name="Dept" ColumnName="Dept" />
+                <ScalarProperty Name="TOTAL" ColumnName="TOTAL" />
+                <ScalarProperty Name="CurrentPayment" ColumnName="CurrentPayment" />
+                <ScalarProperty Name="Account" ColumnName="Account" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

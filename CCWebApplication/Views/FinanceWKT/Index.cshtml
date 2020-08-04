@@ -1,0 +1,91 @@
+﻿
+@* Important! Register the following route if it's not existing in the RouteTable
+config.Routes.MapHttpRoute(
+    name: "DefaultApi",
+    routeTemplate: "api/{controller}/{id}",
+    defaults: new { id = RouteParameter.Optional }
+);
+*@
+
+<div id="grid"></div>
+<script>
+    $("#grid").kendoGrid({
+        height: 400,
+        columns: [
+            {field: "Account"},
+            {field: "Dept"},
+            {field: "Cons_Code"},
+            {field: "Active"},
+            {field: "Name"},
+            {field: "TOWNSHIPID"},
+            {field: "STANDID"},
+            {field: "METER_NUMBER"},
+            {field: "READING"},
+            {field: "CONDITION"},
+            {field: "RESIDENTS"},
+            {field: "WATER_SOURCE"},
+            {field: "ILLEGAL_CONNECTION_"},
+            {field: "BURST_PIPES__"},
+            {field: "TOILET_SEATS_"},
+            {field: "xCoordinate"},
+            {field: "yCoordinate"},
+            {field: "wkt"}
+        ],
+        toolbar: ["excel", "pdf"],
+        dataSource: {
+            type: "webapi", 
+            transport: {
+                idField: "id",
+                read: {
+                     url: "/api/vwZimStandsWKTs"
+                }
+			},
+            schema: {
+                data: "Data",
+                total: "Total", 
+                errors: "Errors",
+                model: {
+                    id: "id",
+					fields: {
+						id: { type: "number"},
+						Account: { type: "string"},
+						CurrentPayment: { type: "number"},
+						TOTAL: { type: "number"},
+						Dept: { type: "string"},
+						Cons_Code: { type: "string"},
+						Active: { type: "string"},
+						Name: { type: "string"},
+						TOWNSHIPID: { type: "string"},
+						STANDID: { type: "string"},
+						METER_NUMBER: { type: "string"},
+						READING: { type: "string"},
+						CONDITION: { type: "string"},
+						RESIDENTS: { type: "string"},
+						WATER_SOURCE: { type: "string"},
+						ILLEGAL_CONNECTION_: { type: "string"},
+						BURST_PIPES__: { type: "string"},
+						TOILET_SEATS_: { type: "string"},
+						xCoordinate: { type: "number"},
+						yCoordinate: { type: "number"},
+						wkt: { type: "string"}
+					}
+                }
+            },
+            serverPaging: true,
+            serverSorting: true,
+            serverFiltering: true,
+            serverGrouping: true,
+            serverAggregates: true,
+        },
+        columnMenu: true,
+        pageable: true,
+        navigatable: true,
+        selectable: "single row",
+        sortable: {
+            mode: "single"
+        },
+        filterable: true,
+        scrollable: true
+    })
+
+</script>

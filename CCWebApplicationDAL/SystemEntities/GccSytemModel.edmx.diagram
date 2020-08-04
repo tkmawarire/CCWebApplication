@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="9d703d6cb3e3410f8606802375e5ccf7" Name="Diagram1" ZoomLevel="108">
+        <EntityTypeShape EntityType="GccSytemModel.bulkmeter" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="GccSytemModel.hydrant" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="GccSytemModel.leakage" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="GccSytemModel.manhole" Width="1.5" PointX="2.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="GccSytemModel.province" Width="1.5" PointX="4.375" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="GccSytemModel.watervalf" Width="1.5" PointX="4.375" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="GccSytemModel.zimcity" Width="1.5" PointX="14" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="GccSytemModel.zimprovince" Width="1.5" PointX="14" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="GccSytemModel.zimtownship" Width="1.5" PointX="14" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="GccSytemModel.vwStand" Width="1.5" PointX="17.125" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="GccSytemModel.vwleakageTown" Width="1.5" PointX="17.125" PointY="5.125" />
+        <EntityTypeShape EntityType="GccSytemModel.zimstand" Width="1.5" PointX="6.375" PointY="0.75" />
+        <EntityTypeShape EntityType="GccSytemModel.vwAccountsMkobaMatch" Width="1.5" PointX="8.375" PointY="4.5" />
+        <EntityTypeShape EntityType="GccSytemModel.wMainLine" Width="1.5" PointX="0.75" PointY="7.75" />
+        <EntityTypeShape EntityType="GccSytemModel.vwMkobaMatchingGrid" Width="1.5" PointX="3.375" PointY="7.75" />
+        <EntityTypeShape EntityType="GccSytemModel.vwFinanceGridCoordinate" Width="1.5" PointX="5.375" PointY="7.75" />
+        <EntityTypeShape EntityType="GccSytemModel.vwZimStandsWKT" Width="1.5" PointX="10.375" PointY="4.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

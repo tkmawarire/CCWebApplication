@@ -1,0 +1,57 @@
+﻿
+@{
+    ViewBag.Title = "LeakageCharts";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Leakage Data Visualization</h2>
+<link href="~/Content/gcc.charts.leakages.css" rel="stylesheet" />
+<div>
+    <div class="container" style="padding-top: 50px; margin-top: 25px;">
+        <div class="row-fluid" id="pieCharts">
+            <div class="col-xs-6 col-md-4">
+                <!--Donut Chart-->
+                <div class="page-header" style="color: skyblue;">Real Time(Leakages Distrubution By Type)</div>
+                <svg id="leakageArea" class="mypiechart"></svg>
+
+            </div>
+            <div class="col-xs-6 col-md-4">
+                <!--Pie Chart-->
+                <div class="page-header" style="color: skyblue;">Real Time(Leakages Distrubution By Type)</div>
+                <svg id="leakageType" class="mypiechart"></svg>
+
+            </div>
+            <div class="col-xs-6 col-md-4">
+                <!--Chart Chart-->
+                <div class="page-header" style="color: skyblue;">Real Time(Leakages Distrubution By Type)-Present</div>
+                <svg id="leakageGraph" class="mypiechart"></svg>
+
+            </div>
+        </div>
+        <div id="bargraphs">
+            <div class="row-fluid">
+                <div class="col-xs-12 col-md-12">
+                    <div class="page-header" style="color: skyblue;">Leakages Distrubution By Type - Histogram</div>
+                    <div id="histogramChart">
+                        <svg></svg>
+                    </div>
+                </div>
+            </div>
+            <div class="row-fluid">
+                <div class="col-lg-12">
+                    <div class="page-header" style="color: skyblue;">Leakages Distrubution By Area</div>
+                    <div id="townshipsChart">
+                        <svg></svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    var leakageHistogram = "@Url.Action("LeakageHistogram", "Charts")",
+        leakageAreaHistogram = "@Url.Action("LeakageAreaHistogram", "Charts")",
+        leakageResult = "@Url.Action("LeakageResult", "Charts")";
+</script>
+
+

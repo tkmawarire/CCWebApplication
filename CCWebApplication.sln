@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30320.27
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CCWebApplication", "CCWebApplication\CCWebApplication.csproj", "{6C0C9D66-9D65-47F7-AD21-ED7DA7623D21}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CCWebApplicationDAL", "CCWebApplicationDAL\CCWebApplicationDAL.csproj", "{9A6F9DE5-4C87-49AB-A051-F7E132F325D6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6C0C9D66-9D65-47F7-AD21-ED7DA7623D21}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6C0C9D66-9D65-47F7-AD21-ED7DA7623D21}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6C0C9D66-9D65-47F7-AD21-ED7DA7623D21}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6C0C9D66-9D65-47F7-AD21-ED7DA7623D21}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9A6F9DE5-4C87-49AB-A051-F7E132F325D6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9A6F9DE5-4C87-49AB-A051-F7E132F325D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9A6F9DE5-4C87-49AB-A051-F7E132F325D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9A6F9DE5-4C87-49AB-A051-F7E132F325D6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2768B36B-811B-4172-A1F6-9F1BCA3065BD}
+	EndGlobalSection
+EndGlobal

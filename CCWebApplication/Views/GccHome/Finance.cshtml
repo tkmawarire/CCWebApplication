@@ -1,0 +1,271 @@
+﻿@{
+    ViewBag.Title = "Finance";
+    Layout = "~/Views/Shared/_MapLayout.cshtml";
+}
+<style>
+        #legendtable {
+        font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+        border-collapse: collapse;
+        /*width: 100%;*/
+    }
+
+        #legendtable td, #legendtable th {
+            border: 1px solid #ddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        #legendtable tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        #legendtable tr:hover {
+            background-color: #ddd;
+        }
+
+        #legendtable th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            background-color: #4CAF50;
+            color: white;
+        }
+</style>
+<link href="~/Content/gcc.index.charts.css" rel="stylesheet" />
+<div class="container-fluid body-content" id="map"></div><!--Map DIV-->
+<div id="bar">
+    <div class="container-fluid">
+        <div id="grid"></div>
+    </div>
+</div><!--Top Bar DIV-->
+<div id="sidebar" class="sidebar collapsed">
+    <!-- Nav tabs -->
+    <div class="sidebar-tabs">
+        <ul role="tablist">
+            <li><a href="#home" role="tab"><i class="fa fa-bars"></i></a></li>
+            <li><a href="#profile" role="tab"><i class="fa fa-tachometer"></i></a></li>
+            <li class="disabled"><a href="#messages" role="tab"><i class="fa fa-area-chart"></i></a></li>
+        </ul>
+
+        <ul role="tablist">
+            <li><a href="#settings" role="tab"><i class="fa fa-gear"></i></a></li>
+        </ul>
+    </div>
+    <!-- Tab panes -->
+    <div class="sidebar-content">
+        <div class="sidebar-pane" id="home">
+            <h1 class="sidebar-header">
+                Water Audit Dashboard
+                <span class="sidebar-close"><i class="fa fa-caret-left"></i></span>
+            </h1>
+            <div class="container">
+                <!--DIV Content to go here-->
+                <div id="statspanel" class="with-3d-shadow with-transitions">
+                    <div class="page-header" style="color: skyblue;">Illegal Connections</div>
+                    <div class="row">
+                        <div class="col-xs-6 col-md-3">
+                            <svg id="donutChart" class="mypiechart"></svg>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-6 col-md-3">
+                            <svg id="pieChart" class="mypiechart"></svg>
+                        </div>
+                    </div>
+                    <div class="page-header" style="color: skyblue;">Meter Condition(By Status)</div>
+                    <div class="row">
+                        <div class="col-xs-6 col-md-3">
+                            <div id="histogramChart">
+                                <svg></svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="sidebar-pane" id="profile">
+            <h1 class="sidebar-header">
+                Navigation
+                <span class="sidebar-close"><i class="fa fa-caret-left"></i></span>
+            </h1>
+            <div class="container">
+                <h2>Select Township</h2>
+                <p>
+                    <label for="provinces">Provinces:</label>
+                    @(Html.Kendo().DropDownList()
+                          .Name("provinces")
+                          .HtmlAttributes(new { style = "width:300px" })
+                          .OptionLabel("Select province...")
+                          .DataTextField("provinceName")
+                          .DataValueField("provinceCode")
+                          .Filter("contains")
+                          .DataSource(source =>
+                          {
+                              source.Read(read =>
+                              {
+                                  read.Action("GetCascadeProvinces", "CascadingDropdown");
+                              });
+                          })
+                        .Events(e =>
+                        {
+                            e.Change("onProvinceChange")
+                             .Select("onProvinceSelect");
+                        })
+                    )
+                    <script>
+                        function onProvinceChange() {
+                            console.log("event: open");
+                        }
+                        function onProvinceSelect(e) {
+                            var dataItem = this.dataItem(e.item);
+                            console.log(dataItem.provinceCode);
+                            console.log("event :: select (" + dataItem.id + " : " + dataItem.name + ")");
+                            var provinces = $("#provinces").data("kendoDropDownList");
+                            $.getJSON('@Url.Action("GetSelectedProvince", "CascadingDropdown")?id=' + dataItem.provinceCode, function (json) {
+
+                                var jsonResult = {
+                                    "type": "FeatureCollection",
+                                    "features": json
+                                };
+                                var provincePolygon = (jsonResult);
+                                var selectedProv = L.geoJson(provincePolygon, {
+                                });
+                                map.fitBounds(selectedProv.getBounds());
+                            });
+                        }
+                    </script>
+                </p>
+                <p>
+                    <label for="cities">Cities Wthin:</label>
+                    @(Html.Kendo().DropDownList()
+                          .Name("cities")
+                          .HtmlAttributes(new { style = "width:300px" })
+                          .OptionLabel("Select city...")
+                          .DataTextField("cityName")
+                          .DataValueField("cityID")
+                          .Filter("contains")
+                          .DataSource(source =>
+                          {
+                              source.Read(read =>
+                              {
+                                  read.Action("GetCascadeCities", "CascadingDropdown")
+                                      .Data("filterCities");
+                              })
+                              .ServerFiltering(true);
+                          })
+                          .Events(e =>
+                          {
+                              e.Change("onCitiesChange")
+                               .Select("onCitiesSelect");
+                          })
+                          .Enable(false)
+                          .AutoBind(false)
+                          .CascadeFrom("provinces")
+                    )
+                    <script>
+                        function filterCities() {
+                            return {
+                                provinces: $("#provinces").val()
+                            };
+                        }
+                        function onCitiesChange() {
+                            console.log("event: open");
+                        }
+                        function onCitiesSelect(e) {
+                            var dataItem = this.dataItem(e.item);
+                            console.log(dataItem);
+                            $.getJSON('@Url.Action("GetSelectedCity", "CascadingDropdown")?id=' + dataItem.cityID, function (json) {
+                                var jsonResult = {
+                                    "type": "FeatureCollection",
+                                    "features": json
+                                };
+                                var provincePolygon = (jsonResult);
+                                var selectedProv = L.geoJson(provincePolygon, {
+                                });
+                                map.fitBounds(selectedProv.getBounds());
+                            });
+                        }
+                    </script>
+                </p>
+                <p>
+                    <label for="townships">Townships:</label>
+                    @(Html.Kendo().DropDownList()
+                          .Name("townships")
+                          .HtmlAttributes(new { style = "width:300px" })
+                          .OptionLabel("Select township...")
+                          .DataTextField("townshipName")
+                          .DataValueField("townshipID")
+                          .Filter("contains")
+                          .DataSource(source =>
+                          {
+                              source.Read(read =>
+                              {
+                                  read.Action("GetCascadeTownships", "CascadingDropdown")
+                                      .Data("filterTownships");
+                              })
+                              .ServerFiltering(true);
+                          }).Events(e =>
+                          {
+                              e.Change("onTownshipChange")
+                               .Select("onTownshipSelect");
+                          })
+                          .Enable(false)
+                          .AutoBind(false)
+                          .CascadeFrom("cities")
+                    )
+                    <script>
+                        function filterTownships() {
+                            return {
+                                cities: $("#cities").val()
+                            };
+                        }
+                        function onTownshipChange() {
+                            console.log("event: open");
+                        }
+                        function onTownshipSelect(e) {
+                            var dataItem = this.dataItem(e.item);
+                            console.log(dataItem);
+                            $.getJSON('@Url.Action("GetSelectedTown", "CascadingDropdown")?id=' + dataItem.townshipID, function (json) {
+                                var jsonResult = {
+                                    "type": "FeatureCollection",
+                                    "features": json
+                                };
+                                var provincePolygon = (jsonResult);
+                                var selectedProv = L.geoJson(provincePolygon, {
+                                });
+                                map.fitBounds(selectedProv.getBounds(), 22);
+                            });
+                        }
+                    </script>
+                </p>
+            </div>
+            <script>
+                $(document).ready(function () {
+                    var provinces = $("#provinces").data("kendoDropDownList"),
+                        cities = $("#cities").data("kendoDropDownList"),
+                        townships = $("#townships").data("kendoDropDownList");
+                });
+            </script>
+        </div>
+
+        <div class="sidebar-pane" id="messages">
+            <h1 class="sidebar-header">Messages<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
+        </div>
+        <div class="sidebar-pane" id="settings">
+            <h1 class="sidebar-header">Settings<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
+        </div>
+    </div>
+</div>
+<script>
+    var getProperties = "@Url.Action("GetProperties","GetGeojsonData")",
+        getBounded = "@Url.Action("GetBoundsResult", "GetGeojsonData")",
+        getBoundsFinance = "@Url.Action("GetBoundsFinance", "GetGeojsonData")",
+    getIllegalCondition = "@Url.Action("GetIllegalCon","Charts")", 
+    getMeterCondition = "@Url.Action("GetMeterCondition","Charts")";
+    var urlGridApi = "@Url.RouteUrl("DefaultApi", new {httproute = true, controller = "vwZimStandsWKTs" })";
+    @*var urlGridWebApi = "@Url.HttpRouteUrl("DefaultApi", new { controller = "FaultRecords"})";*@
+    
+</script>
+<script src="~/Scripts/data/zimstands.js"></script>
+<script src="~/Scripts/gcc.finance.map.js"></script> 
+

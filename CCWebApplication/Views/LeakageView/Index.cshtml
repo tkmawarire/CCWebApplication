@@ -1,0 +1,70 @@
+﻿
+@* Important! Register the following route if it's not existing in the RouteTable
+config.Routes.MapHttpRoute(
+    name: "DefaultApi",
+    routeTemplate: "api/{controller}/{id}",
+    defaults: new { id = RouteParameter.Optional }
+);
+*@
+
+<div id="grid"></div>
+<script>
+    $("#grid").kendoGrid({
+        height: 400,
+        columns: [
+            {field: "townshipid"},
+            {field: "Latitude"},
+            {field: "Longitude"},
+            {field: "Source"},
+            {field: "Point"},
+            {field: "Name"},
+            {command: [ "edit" ], width: 180 }
+        ],
+        toolbar: ["excel", "pdf"],
+        dataSource: {
+            type: "webapi", 
+            transport: {
+                idField: "id",
+                read: {
+                     url: "/api/vwleakageTowns"
+                }, 
+				update: { 
+					url: "/api/vwleakageTowns/{0}"
+				}
+			},
+            schema: {
+                data: "Data",
+                total: "Total", 
+                errors: "Errors",
+                model: {
+                    id: "id",
+					fields: {
+						townshipid: { type: "number"},
+						Latitude: { type: "number"},
+						Longitude: { type: "number"},
+						Source: { type: "string"},
+						Point: { type: "string"},
+						Name: { type: "string"},
+						id: { type: "number"}
+					}
+                }
+            },
+            serverPaging: true,
+            serverSorting: true,
+            serverFiltering: true,
+            serverGrouping: true,
+            serverAggregates: true,
+        },
+        columnMenu: true,
+        editable: "popup",
+        pageable: true,
+        navigatable: true,
+        selectable: "single row",
+        sortable: {
+            mode: "multiple"
+        },
+        filterable: true,
+        scrollable: true
+    })
+
+</script>

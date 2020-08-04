@@ -1,0 +1,374 @@
+﻿
+@{
+    ViewBag.Title = "GCC-Water Reticulation";
+    Layout = "~/Views/Shared/_MapLayout.cshtml";
+}
+<div class="container-fluid body-content" id="map"></div><!--Map DIV-->
+<div id="sidebar" class="sidebar collapsed">
+    <!-- Nav tabs -->
+    <div class="sidebar-tabs">
+        <ul role="tablist">
+            <li><a href="#home" role="tab"><i class="fa fa-bars"></i></a></li>
+            <li><a href="#profile" role="tab"><i class="fa fa-tachometer"></i></a></li>
+            <li class="disabled"><a href="#messages" role="tab"><i class="fa fa-area-chart"></i></a></li>
+        </ul>
+
+        <ul role="tablist">
+            <li><a href="#settings" role="tab"><i class="fa fa-gear"></i></a></li>
+        </ul>
+    </div>
+    <!-- Tab panes -->
+    <div class="sidebar-content">
+        <div class="sidebar-pane" id="home">
+            <h1 class="sidebar-header">
+                Water Audit Dashboard
+                <span class="sidebar-close"><i class="fa fa-caret-left"></i></span>
+            </h1>
+            <div class="container">
+                <!--DIV Content to go here-->
+                <div></div>
+            </div>
+        </div>
+
+        <div class="sidebar-pane" id="profile">
+            <h1 class="sidebar-header">
+                Navigation
+                <span class="sidebar-close"><i class="fa fa-caret-left"></i></span>
+            </h1>
+            <div class="container">
+                <h2>Select Township</h2>
+                <p>
+                    <label for="provinces">Provinces:</label>
+                    @(Html.Kendo().DropDownList()
+                  .Name("provinces")
+                  .HtmlAttributes(new { style = "width:300px" })
+                  .OptionLabel("Select province...")
+                  .DataTextField("provinceName")
+                  .DataValueField("provinceCode")
+                  .Filter("contains")
+                  .DataSource(source =>
+                  {
+                      source.Read(read =>
+                      {
+                          read.Action("GetCascadeProvinces", "CascadingDropdown");
+                      });
+                  })
+                  .Events(e =>
+                  {
+                      e.Change("onProvinceChange")
+                          .Select("onProvinceSelect");
+                  })
+                    )
+                    <script>
+                function onProvinceChange() {
+                    console.log("event: open");
+                }
+
+                function onProvinceSelect(e) {
+                    var dataItem = this.dataItem(e.item);
+                    console.log(dataItem.provinceCode);
+                    console.log("event :: select (" + dataItem.id + " : " + dataItem.name + ")");
+                    var provinces = $("#provinces").data("kendoDropDownList");
+                    $.getJSON('@Url.Action("GetSelectedProvince", "CascadingDropdown")?id=' + dataItem.provinceCode, function(json) {
+
+                        var jsonResult = {
+                            "type": "FeatureCollection",
+                            "features": json
+                        };
+                        var provincePolygon = (jsonResult);
+                        //console.log(provincePolygon);
+
+                        var selectedProv = L.geoJson(provincePolygon, {
+                            //style: style,
+                            //onEachFeature: onEachFeature
+
+                        });
+                        map.fitBounds(selectedProv.getBounds());
+                    });
+                }
+                    </script>
+                </p>
+                <p>
+                    <label for="cities">Cities Wthin:</label>
+                    @(Html.Kendo().DropDownList()
+                  .Name("cities")
+                  .HtmlAttributes(new { style = "width:300px" })
+                  .OptionLabel("Select city...")
+                  .DataTextField("cityName")
+                  .DataValueField("cityID")
+                  .Filter("contains")
+                  .DataSource(source =>
+                  {
+                      source.Read(read =>
+                      {
+                          read.Action("GetCascadeCities", "CascadingDropdown")
+                              .Data("filterCities");
+                      })
+                          .ServerFiltering(true);
+                  })
+                  .Events(e =>
+                  {
+                      e.Change("onCitiesChange")
+                          .Select("onCitiesSelect");
+                  })
+                  .Enable(false)
+                  .AutoBind(false)
+                  .CascadeFrom("provinces")
+                    )
+                    <script>
+                function filterCities() {
+                    return {
+                        provinces: $("#provinces").val()
+                    };
+                }
+
+                function onCitiesChange() {
+                    console.log("event: open");
+                }
+
+                function onCitiesSelect(e) {
+                    var dataItem = this.dataItem(e.item);
+                    console.log(dataItem);
+                    $.getJSON('@Url.Action("GetSelectedCity", "CascadingDropdown")?id=' + dataItem.cityID, function(json) {
+                        var jsonResult = {
+                            "type": "FeatureCollection",
+                            "features": json
+                        };
+                        var provincePolygon = (jsonResult);
+                        var selectedProv = L.geoJson(provincePolygon, {
+
+                        });
+                        map.fitBounds(selectedProv.getBounds());
+                    });
+                }
+                    </script>
+                </p>
+                <p>
+                    <label for="townships">Townships:</label>
+                    @(Html.Kendo().DropDownList()
+                  .Name("townships")
+                  .HtmlAttributes(new { style = "width:300px" })
+                  .OptionLabel("Select township...")
+                  .DataTextField("townshipName")
+                  .DataValueField("townshipID")
+                  .Filter("contains")
+                  .DataSource(source =>
+                  {
+                      source.Read(read =>
+                      {
+                          read.Action("GetCascadeTownships", "CascadingDropdown")
+                              .Data("filterTownships");
+                      })
+                          .ServerFiltering(true);
+                  }).Events(e =>
+                  {
+                      e.Change("onTownshipChange")
+                          .Select("onTownshipSelect");
+                  })
+                  .Enable(false)
+                  .AutoBind(false)
+                  .CascadeFrom("cities")
+                    )
+                    <script>
+                function filterTownships() {
+                    return {
+                        cities: $("#cities").val()
+                    };
+                }
+
+                function onTownshipChange() {
+                    console.log("event: open");
+                }
+
+                function onTownshipSelect(e) {
+                    var dataItem = this.dataItem(e.item);
+                    console.log(dataItem);
+                    $.getJSON('@Url.Action("GetSelectedTown", "CascadingDropdown")?id=' + dataItem.townshipID, function(json) {
+                        var jsonResult = {
+                            "type": "FeatureCollection",
+                            "features": json
+                        };
+                        var provincePolygon = (jsonResult);
+                        var selectedProv = L.geoJson(provincePolygon, {
+
+                        });
+                        map.fitBounds(selectedProv.getBounds(), 22);
+                    });
+                }
+                    </script>
+                </p>
+            </div>
+            <script>
+        $(document).ready(function() {
+            var provinces = $("#provinces").data("kendoDropDownList"),
+                cities = $("#cities").data("kendoDropDownList"),
+                townships = $("#townships").data("kendoDropDownList");
+
+            //$("#get").click(function () {
+            //    var provinceInfo = "\nProvince: { id: " + provinces.value() + ", name: " + provinces.text() + " }",
+            //        cityInfo = "\nCity: { id: " + cities.value() + ", name: " + cities.text() + " }",
+            //        townInfo = "\nTownship: { id: " + townships.value() + ", name: " + townships.text() + " }";
+            //    console.log("Township details:\n" + provinceInfo + cityInfo + townInfo);
+            //});
+        });
+            </script>
+        </div>
+
+        <div class="sidebar-pane" id="messages">
+            <h1 class="sidebar-header">Messages<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
+        </div>
+        <div class="sidebar-pane" id="settings">
+            <h1 class="sidebar-header">Settings<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
+        </div>
+    </div>
+</div>
+<div id="sidebar_mini" class="container-fluid">
+    @*<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">*@
+    @*<link href="https://fonts.googleapis.com/css?family=Passion+One" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Oxygen" rel="stylesheet" type="text/css">*@
+    <link href="~/Content/switch.style.css" rel="stylesheet" />
+    <div class="container">
+        <div class="row main">
+            <div class="panel-heading">
+                <div class="panel-title text-center">
+                    <h1 class="title">Valve Info</h1>
+                    <hr />
+                </div>
+            </div>
+            <!--main-login main-center-->
+            <div class="container">
+                <form class="form-horizontal" action="#">
+                    <div class="form-group">
+                        <label for="valveid" class="cols-sm-2 control-label">Valve ID</label>
+                        <div class="cols-sm-10">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-link fa" aria-hidden="true"></i></span>
+                                <input type="text" class="form-control" name="valveid" id="valveid" placeholder="Valve ID" readonly="readonly" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="valvesize" class="cols-sm-2 control-label">Valve Size</label>
+                        <div class="cols-sm-10">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-circle-thin fa" aria-hidden="true"></i></span>
+                                <input type="text" class="form-control" name="valvesize" id="valvesize" placeholder="Valve Size" readonly="readonly" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="tomainline" class="cols-sm-2 control-label">To-Aterial</label>
+                        <div class="cols-sm-10">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-arrow-right fa" aria-hidden="true"></i></span>
+                                <input type="text" class="form-control" name="tomainline" id="tomainline" placeholder="To Main Line" readonly="readonly" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="fromaterial" class="cols-sm-2 control-label">From-Aterial</label>
+                        <div class="cols-sm-10">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-arrow-left fa" aria-hidden="true"></i></span>
+                                <input type="text" class="form-control" name="fromaterial" id="fromaterial" placeholder="From Main Line" readonly="readonly" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="myonoffswitch1" class="cols-sm-2 control-label">Valve State</label>
+                        <div class="cols-sm-10">
+                            <div class="onoffswitch1">
+                                <input type="checkbox" name="onoffswitch1" class="onoffswitch1-checkbox" id="myonoffswitch1" checked>
+                                <label class="onoffswitch1-label" for="myonoffswitch1">
+                                    <span class="onoffswitch1-inner"></span>
+                                    <span class="onoffswitch1-switch"></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="sidebar_pipe" class="container-fluid">
+    <div class="container">
+        <div class="row main">
+            <div class="panel-heading">
+                <div class="panel-title text-center">
+                    <h1 class="title">Pipe Info</h1>
+                    <hr />
+                </div>
+            </div>
+            <!--main-frame main-center-->
+            <div class="container">
+                <form class="form-horizontal" action="#">
+                    <div class="form-group">
+                        <label for="pipeid" class="cols-sm-2 control-label">Pipe ID</label>
+                        <div class="cols-sm-10">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-link fa" aria-hidden="true"></i></span>
+                                <input type="text" class="form-control" name="valveid" id="pipeid" placeholder="Pipe ID" readonly="readonly" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="pipesize" class="cols-sm-2 control-label">Pipe Size</label>
+                        <div class="cols-sm-10">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-circle-thin fa" aria-hidden="true"></i></span>
+                                <input type="text" class="form-control" name="valvesize" id="pipesize" placeholder="Pipe Size" readonly="readonly" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="tovalveid" class="cols-sm-2 control-label">Valve Start</label>
+                        <div class="cols-sm-10">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-arrow-right fa" aria-hidden="true"></i></span>
+                                <input type="text" class="form-control" name="tomainline" id="tovalveid" placeholder="Valve ID" readonly="readonly" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="fromvalveid" class="cols-sm-2 control-label">Valve End</label>
+                        <div class="cols-sm-10">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-arrow-left fa" aria-hidden="true"></i></span>
+                                <input type="text" class="form-control" name="fromaterial" id="fromvalveid" placeholder="From Main Line" readonly="readonly" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="myonoffswitch" class="cols-sm-2 control-label">Pipe In Mantanance?</label>
+                        <div class="cols-sm-10">
+                            <div class="onoffswitch">
+                                <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" checked>
+                                <label class="onoffswitch-label" for="myonoffswitch">
+                                    <span class="onoffswitch-inner"></span>
+                                    <span class="onoffswitch-switch"></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    var wWindsorPark = "@Url.Action("wWindsorPark", "Home")";
+    var wMainLine = "@Url.Action("GetWaterLines", "GetGeojsonData")";
+    var wHydrants = "@Url.Action("wHydrants", "Home")";
+    var wValves = "@Url.Action("wValves", "Home")";
+    var wServiceConnection = "@Url.Action("wServiceConnection", "Home")";
+    var wLiteralLine = "@Url.Action("wLiteralLine", "Home")";
+    var wStands2ValvesResult = "@Url.Action("WStands2ValvesResult","Home")";
+    var vwAffectedHouses = "@Url.Action("vwAffectedHousing","Home")";
+</script>
+<script src="~/Scripts/housing.water.retuculation.js"></script>
+

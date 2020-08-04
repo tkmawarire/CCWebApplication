@@ -1,0 +1,159 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <title>@ViewBag.Title - GCC Reporting</title>
+    @Styles.Render("~/Content/mapcss")
+    @Scripts.Render("~/bundles/modernizr")
+
+    <!--This bundle was moved by the Telerik VS Extensions for compatibility reasons-->
+    @Scripts.Render("~/bundles/jquery")
+    <link href="@Url.Content("~/Content/kendo/2016.1.112/kendo.common.min.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/kendo/2016.1.112/kendo.mobile.all.min.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/kendo/2016.1.112/kendo.dataviz.min.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/kendo/2016.1.112/kendo.blueopal.min.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/kendo/2016.1.112/kendo.dataviz.blueopal.min.css")" rel="stylesheet" type="text/css"/>
+    <script src="https://api.tiles.mapbox.com/mapbox-gl-js/v0.17.0/mapbox-gl.js"></script>
+    <link href="https://api.tiles.mapbox.com/mapbox-gl-js/v0.17.0/mapbox-gl.css" rel="stylesheet" />
+    <!--MappingLibrary Plugins-->
+    <link href="~/Content/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/Content/leaflet.css" rel="stylesheet" />
+    <link href="~/Content/L.Control.Bar.css" rel="stylesheet" />
+    <link href="~/Content/L.Control.Locate.css" rel="stylesheet" />
+    <link href="~/Content/L.Control.Panel.css" rel="stylesheet" />
+    <link href="~/Content/L.Control.Sidebar.css" rel="stylesheet" />
+    <link href="~/Content/L.Control.ZoomBox.css" rel="stylesheet" />
+    <link href="~/Content/leaflet-measure.css" rel="stylesheet" />
+    <link href="~/Content/easy-button.css" rel="stylesheet" />
+    <link href="~/Content/easyPrint.css" rel="stylesheet" />
+    <link href="~/Content/leaflet-sidebar.css" rel="stylesheet" />
+    <link href="~/Content/leaflet.draw.css" rel="stylesheet" />
+    <link href="~/Content/leaflet.iconlabel.css" rel="stylesheet" />
+    <link href="~/Content/leaflet.measurecontrol.css" rel="stylesheet" />
+    <link href="~/Content/Leaflet.NavBar.css" rel="stylesheet" />
+    <link href="~/Content/MarkerCluster.Default.css" rel="stylesheet" />
+    <link href="~/Content/MarkerCluster.css" rel="stylesheet" />
+    <link href="~/Content/nv.d3.css" rel="stylesheet" />
+    <link href="~/Content/PruneCluster.css" rel="stylesheet"/>
+    <link href="~/Content/label.css" rel="stylesheet" />
+    <link href="~/Content/leaflet.contextmenu.css" rel="stylesheet" />
+    <link href="~/Content/Leaflet.TileLegend.css" rel="stylesheet"/>
+    <link href="~/Content/switch.style.css" rel="stylesheet" />
+    <script src="@Url.Content("~/Scripts/kendo/2016.1.112/jquery.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/kendo/2016.1.112/jszip.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/kendo/2016.1.112/kendo.all.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/kendo/2016.1.112/kendo.aspnetmvc.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/kendo.modernizr.custom.js")"></script>
+
+</head>
+<body>
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            @Html.ActionLink("GCC GIS", "Index", "GccHome", new {area = ""}, new {@class = "navbar-brand"})
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Finance<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li>@Html.ActionLink("Property Status", "Finance", "GccHome")</li>
+                        <li role="separator" class="divider"></li>
+                        <li>@Html.ActionLink("Amount Owing Stats", "FinanceVisualization", "GccHome")</li>
+                        <li role="separator" class="divider"></li>
+                        <li>@Html.ActionLink("Water Reticulation", "WaterReticulation", "Home")</li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="#">Age Analysis</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="#">Custom Analysis</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Engineering<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li>@Html.ActionLink("Leakage Data", "LeakageCharts", "Leakages")</li>
+                        <li>@Html.ActionLink("Heatmap", "LeakageHeatMap", "Leakages")</li>
+                        <li>@Html.ActionLink("Leakage Records", "Index", "LeakageView")</li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="@Url.Action("LeakageCharts", "Leakages")">Download Report</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="http://localhost/esfrs/MapClient/CitizenDashboard">Report a Fault</a></li>
+                        @*<li>@Html.ActionLink("Old Portal", "CouncilDashboard", "Leakages")</li>*@
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Service Reporting<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="http://localhost/esfrs/MapClient/CitizenDashboard">Report a Fault</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="http://localhost/esfrs/MapClient/SearchFaults">Search a Fault</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="http://localhost/esfrs/Home/Contact">Search a Fault</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="http://localhost/esfrs/MapClient/SupervisorDashboard">Supervisor Dashboard</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="http://localhost/esfrs/MapClient/FeildTeamDashboard">Field Team Dashboard</a></li>
+                    </ul>
+                </li>
+                <li>@Html.ActionLink("Public", "Index", "GccHome")</li>
+                <li>@Html.ActionLink("About", "About", "Home")</li>
+                <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+            </ul>
+            @Html.Partial("_LoginPartial")
+        </div>
+    </div>
+</div>
+    @Scripts.Render("~/bundles/bootstrap")
+    <script src="~/Scripts/spin.js"></script>
+    <script src="~/Scripts/leaflet.js"></script>
+    <script src="~/Scripts/leaflet.markercluster.js"></script>
+    <script src="~/Scripts/Autolinker.min.js"></script>
+    <script src="~/Scripts/bootbox.min.js"></script>
+    <script src="~/Scripts/bootstrap-select.min.js"></script>
+    <script src="~/Scripts/d3.min.js"></script>
+    <script src="~/Scripts/easy-button.js"></script>
+    <script src="~/Scripts/flashcanvas.min.js"></script>
+    <script src="~/Scripts/geojson-vt.js"></script>
+    <script src="~/Scripts/html2canvas.js"></script>
+    <script src="~/Scripts/L.CanvasTiles.js"></script>
+    <script src="~/Scripts/L.Control.Bar.js"></script>
+    <script src="~/Scripts/L.Control.Locate.js"></script>
+    <script src="~/Scripts/L.Control.SidebarMini.js"></script>
+    <script src="~/Scripts/L.Control.ZoomBox.js"></script>
+    <script src="~/Scripts/L.D3SvgOverlay.min.js"></script>
+    <script src="~/Scripts/leaflet-echarts.js"></script>
+    <script src="~/Scripts/leaflet-hash.js"></script>
+    <script src="~/Scripts/leaflet-heat.js"></script>
+    <script src="~/Scripts/leaflet-measure.js"></script>
+    <script src="~/Scripts/leaflet-measure.min.js"></script>
+    <script src="~/Scripts/leaflet-realtime.js"></script>
+    <script src="~/Scripts/leaflet-sidebar.js"></script>
+    <script src="~/Scripts/leaflet.draw.js"></script>
+    <script src="~/Scripts/leaflet.easyPrint.js"></script>
+    <script src="~/Scripts/leaflet.iconlabel.js"></script>
+    <script src="~/Scripts/Leaflet.MapboxVectorTile.js"></script>
+    <script src="~/Scripts/leaflet.measurecontrol.js"></script>
+    <script src="~/Scripts/Leaflet.NavBar.js"></script>
+    <script src="~/Scripts/leaflet.search.min.js"></script>
+    <script src="~/Scripts/leaflet.spin.js"></script>
+    <script src="~/Scripts/nv.d3.js"></script>
+    <script src="~/Scripts/OSMBuildings-Leaflet.js"></script>
+    <script src="~/Scripts/PruneCluster.js"></script>
+    <script src="~/Scripts/TileLayer.GeoJSON.js"></script>
+    <script src="~/Scripts/leaflet.contextmenu.min.js"></script>
+    <script src="~/Scripts/Leaflet.TileLegend.js"></script>
+    <script src="~/Scripts/leaflet-omnivore.min.js"></script>
+    @RenderBody()
+    @RenderSection("scripts", required: false)
+</body>
+</html>

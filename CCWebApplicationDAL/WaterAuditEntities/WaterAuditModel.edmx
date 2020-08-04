@@ -1,0 +1,531 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="WaterAuditModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="wHydrants">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="hydrant" Type="nvarchar" MaxLength="255" />
+          <Property Name="lat" Type="real" />
+          <Property Name="long" Type="real" />
+          <Property Name="geom" Type="geometry" />
+        </EntityType>
+        <EntityType Name="wLiteralLine">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Enabled" Type="bigint" />
+          <Property Name="ActiveFlag" Type="bigint" />
+          <Property Name="ManagedBy" Type="nvarchar" MaxLength="255" />
+          <Property Name="OwnedBy" Type="nvarchar" MaxLength="255" />
+          <Property Name="LineType" Type="nvarchar" MaxLength="255" />
+          <Property Name="Material" Type="nvarchar" MaxLength="255" />
+          <Property Name="FacilityId" Type="bigint" />
+          <Property Name="InstalDate" Type="date" />
+          <Property Name="Diameter" Type="bigint" />
+          <Property Name="LastUpdate" Type="date" />
+          <Property Name="AccHolder" Type="nvarchar" MaxLength="255" />
+          <Property Name="ServiceTyp" Type="nvarchar" MaxLength="255" />
+          <Property Name="MeterNumb" Type="nvarchar" MaxLength="255" />
+          <Property Name="Max_Id" Type="bigint" />
+          <Property Name="geom" Type="geometry" />
+        </EntityType>
+        <EntityType Name="wServiceConnection">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Enabled" Type="bigint" />
+          <Property Name="ActiveFlag" Type="bigint" />
+          <Property Name="OwnedBy" Type="nvarchar" MaxLength="255" />
+          <Property Name="ManagedBy" Type="nvarchar" MaxLength="255" />
+          <Property Name="AccNumber" Type="nvarchar" MaxLength="255" />
+          <Property Name="AccHolder" Type="nvarchar" MaxLength="255" />
+          <Property Name="ServiceTyp" Type="nvarchar" MaxLength="255" />
+          <Property Name="MeterNumb" Type="nvarchar" MaxLength="255" />
+          <Property Name="Shape_Leng" Type="real" />
+          <Property Name="Shape_Area" Type="real" />
+          <Property Name="standid" Type="bigint" />
+          <Property Name="FacilityId" Type="bigint" />
+          <Property Name="lat" Type="real" />
+          <Property Name="long" Type="real" />
+          <Property Name="geom" Type="geometry" />
+        </EntityType>
+        <EntityType Name="wValves">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Point" Type="nvarchar" MaxLength="255" />
+          <Property Name="latitude" Type="float" />
+          <Property Name="longitude" Type="float" />
+          <Property Name="Height" Type="float" />
+          <Property Name="size" Type="nvarchar" MaxLength="255" />
+          <Property Name="toaterial" Type="int" />
+          <Property Name="fromateria" Type="int" />
+          <Property Name="geom" Type="geometry" />
+        </EntityType>
+        <EntityType Name="wWindsorPark">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OBJECTID" Type="bigint" />
+          <Property Name="Shape_Leng" Type="real" />
+          <Property Name="Shape_Area" Type="real" />
+          <Property Name="standid" Type="bigint" />
+          <Property Name="standnum" Type="nvarchar" MaxLength="255" />
+          <Property Name="geom" Type="geometry" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'GCCWaterAudit-2016.dbo.vwAccountsMkoba' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'GCCWaterAudit-2016.dbo.vwAccountsMkobaMatch' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'GCCWaterAudit-2016.dbo.vwAffectedHouses' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vwAffectedHouses">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="id_i" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="id_i" Type="int" Nullable="false" />
+          <Property Name="startvalveid" Type="varchar" MaxLength="50" />
+          <Property Name="endvalveid" Type="varchar" MaxLength="50" />
+          <Property Name="pipeid" Type="nvarchar" MaxLength="255" />
+          <Property Name="standid" Type="nvarchar" MaxLength="255" />
+          <Property Name="cityid" Type="bigint" />
+          <Property Name="townshipid" Type="bigint" />
+          <Property Name="standtype" Type="nvarchar" MaxLength="255" />
+          <Property Name="geom" Type="geometry" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'GCCWaterAudit-2016.dbo.vwFinanceGridCoordinates' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'GCCWaterAudit-2016.dbo.vwleakageTown' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'GCCWaterAudit-2016.dbo.vwMkobaMatchingGrid' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'GCCWaterAudit-2016.dbo.vwStandConLiteral' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vwStandConLiteral">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="standid" Type="bigint" />
+          <Property Name="ActiveFlag" Type="bigint" />
+          <Property Name="Enabled" Type="bigint" />
+          <Property Name="ManagedBy" Type="nvarchar" MaxLength="255" />
+          <Property Name="AccNumber" Type="nvarchar" MaxLength="255" />
+          <Property Name="AccHolder" Type="nvarchar" MaxLength="255" />
+          <Property Name="ServiceTyp" Type="nvarchar" MaxLength="255" />
+          <Property Name="MeterNumb" Type="nvarchar" MaxLength="255" />
+          <Property Name="Material" Type="nvarchar" MaxLength="255" />
+          <Property Name="InstalDate" Type="date" />
+          <Property Name="Max_Id" Type="bigint" />
+          <Property Name="geom" Type="geometry" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'GCCWaterAudit-2016.dbo.vwStands' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'GCCWaterAudit-2016.dbo.vwStands2Valves' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vwStands2Valves">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="valveId" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="standid" Type="bigint" />
+          <Property Name="ActiveFlag" Type="bigint" />
+          <Property Name="Enabled" Type="bigint" />
+          <Property Name="ManagedBy" Type="nvarchar" MaxLength="255" />
+          <Property Name="AccNumber" Type="nvarchar" MaxLength="255" />
+          <Property Name="AccHolder" Type="nvarchar" MaxLength="255" />
+          <Property Name="ServiceTyp" Type="nvarchar" MaxLength="255" />
+          <Property Name="MeterNumb" Type="nvarchar" MaxLength="255" />
+          <Property Name="Material" Type="nvarchar" MaxLength="255" />
+          <Property Name="InstalDate" Type="date" />
+          <Property Name="Max_Id" Type="bigint" />
+          <Property Name="geom" Type="geometry" />
+          <Property Name="valveId" Type="int" Nullable="false" />
+          <Property Name="Point" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityContainer Name="WaterAuditModelStoreContainer">
+          <EntitySet Name="wHydrants" EntityType="Self.wHydrants" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="wLiteralLine" EntityType="Self.wLiteralLine" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="wServiceConnection" EntityType="Self.wServiceConnection" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="wValves" EntityType="Self.wValves" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="wWindsorPark" EntityType="Self.wWindsorPark" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="vwAffectedHouses" EntityType="Self.vwAffectedHouses" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vwAffectedHouses].[id] AS [id], 
+    [vwAffectedHouses].[id_i] AS [id_i], 
+    [vwAffectedHouses].[startvalveid] AS [startvalveid], 
+    [vwAffectedHouses].[endvalveid] AS [endvalveid], 
+    [vwAffectedHouses].[pipeid] AS [pipeid], 
+    [vwAffectedHouses].[standid] AS [standid], 
+    [vwAffectedHouses].[cityid] AS [cityid], 
+    [vwAffectedHouses].[townshipid] AS [townshipid], 
+    [vwAffectedHouses].[standtype] AS [standtype], 
+    [vwAffectedHouses].[geom] AS [geom]
+    FROM [dbo].[vwAffectedHouses] AS [vwAffectedHouses]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vwStandConLiteral" EntityType="Self.vwStandConLiteral" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vwStandConLiteral].[id] AS [id], 
+    [vwStandConLiteral].[standid] AS [standid], 
+    [vwStandConLiteral].[ActiveFlag] AS [ActiveFlag], 
+    [vwStandConLiteral].[Enabled] AS [Enabled], 
+    [vwStandConLiteral].[ManagedBy] AS [ManagedBy], 
+    [vwStandConLiteral].[AccNumber] AS [AccNumber], 
+    [vwStandConLiteral].[AccHolder] AS [AccHolder], 
+    [vwStandConLiteral].[ServiceTyp] AS [ServiceTyp], 
+    [vwStandConLiteral].[MeterNumb] AS [MeterNumb], 
+    [vwStandConLiteral].[Material] AS [Material], 
+    [vwStandConLiteral].[InstalDate] AS [InstalDate], 
+    [vwStandConLiteral].[Max_Id] AS [Max_Id], 
+    [vwStandConLiteral].[geom] AS [geom]
+    FROM [dbo].[vwStandConLiteral] AS [vwStandConLiteral]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vwStands2Valves" EntityType="Self.vwStands2Valves" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vwStands2Valves].[id] AS [id], 
+    [vwStands2Valves].[standid] AS [standid], 
+    [vwStands2Valves].[ActiveFlag] AS [ActiveFlag], 
+    [vwStands2Valves].[Enabled] AS [Enabled], 
+    [vwStands2Valves].[ManagedBy] AS [ManagedBy], 
+    [vwStands2Valves].[AccNumber] AS [AccNumber], 
+    [vwStands2Valves].[AccHolder] AS [AccHolder], 
+    [vwStands2Valves].[ServiceTyp] AS [ServiceTyp], 
+    [vwStands2Valves].[MeterNumb] AS [MeterNumb], 
+    [vwStands2Valves].[Material] AS [Material], 
+    [vwStands2Valves].[InstalDate] AS [InstalDate], 
+    [vwStands2Valves].[Max_Id] AS [Max_Id], 
+    [vwStands2Valves].[geom] AS [geom], 
+    [vwStands2Valves].[valveId] AS [valveId], 
+    [vwStands2Valves].[Point] AS [Point]
+    FROM [dbo].[vwStands2Valves] AS [vwStands2Valves]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="WaterAuditModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="wHydrant">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="hydrant" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="lat" Type="Single" />
+          <Property Name="long" Type="Single" />
+          <Property Name="geom" Type="Geometry" />
+        </EntityType>
+        <EntityType Name="wLiteralLine">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Enabled" Type="Int64" />
+          <Property Name="ActiveFlag" Type="Int64" />
+          <Property Name="ManagedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="OwnedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="LineType" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Material" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="FacilityId" Type="Int64" />
+          <Property Name="InstalDate" Type="DateTime" Precision="0" />
+          <Property Name="Diameter" Type="Int64" />
+          <Property Name="LastUpdate" Type="DateTime" Precision="0" />
+          <Property Name="AccHolder" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="ServiceTyp" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="MeterNumb" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Max_Id" Type="Int64" />
+          <Property Name="geom" Type="Geometry" />
+        </EntityType>
+        <EntityType Name="wServiceConnection">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Enabled" Type="Int64" />
+          <Property Name="ActiveFlag" Type="Int64" />
+          <Property Name="OwnedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="ManagedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="AccNumber" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="AccHolder" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="ServiceTyp" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="MeterNumb" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Shape_Leng" Type="Single" />
+          <Property Name="Shape_Area" Type="Single" />
+          <Property Name="standid" Type="Int64" />
+          <Property Name="FacilityId" Type="Int64" />
+          <Property Name="lat" Type="Single" />
+          <Property Name="long" Type="Single" />
+          <Property Name="geom" Type="Geometry" />
+        </EntityType>
+        <EntityType Name="wValf">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Point" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="latitude" Type="Double" />
+          <Property Name="longitude" Type="Double" />
+          <Property Name="Height" Type="Double" />
+          <Property Name="size" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="geom" Type="Geometry" />
+          <Property Name="toaterial" Type="Int32" />
+          <Property Name="fromateria" Type="Int32" />
+        </EntityType>
+        <EntityType Name="wWindsorPark">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OBJECTID" Type="Int64" />
+          <Property Name="Shape_Leng" Type="Single" />
+          <Property Name="Shape_Area" Type="Single" />
+          <Property Name="standid" Type="Int64" />
+          <Property Name="standnum" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="geom" Type="Geometry" />
+        </EntityType>
+        <EntityContainer Name="WaterAuditEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="wHydrants" EntityType="Self.wHydrant" />
+          <EntitySet Name="wLiteralLines" EntityType="Self.wLiteralLine" />
+          <EntitySet Name="wServiceConnections" EntityType="Self.wServiceConnection" />
+          <EntitySet Name="wValves" EntityType="Self.wValf" />
+          <EntitySet Name="wWindsorParks" EntityType="Self.wWindsorPark" />
+          <EntitySet Name="vwAffectedHouses" EntityType="WaterAuditModel.vwAffectedHous" />
+          <EntitySet Name="vwStandConLiterals" EntityType="WaterAuditModel.vwStandConLiteral" />
+          <EntitySet Name="vwStands2Valves" EntityType="WaterAuditModel.vwStands2Valves" />
+        </EntityContainer>
+        <EntityType Name="vwAffectedHous">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="id_i" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="id_i" Type="Int32" Nullable="false" />
+          <Property Name="startvalveid" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="endvalveid" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="pipeid" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="standid" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="cityid" Type="Int64" />
+          <Property Name="townshipid" Type="Int64" />
+          <Property Name="standtype" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="geom" Type="Geometry" />
+        </EntityType>
+        <EntityType Name="vwStandConLiteral">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="standid" Type="Int64" />
+          <Property Name="ActiveFlag" Type="Int64" />
+          <Property Name="Enabled" Type="Int64" />
+          <Property Name="ManagedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="AccNumber" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="AccHolder" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="ServiceTyp" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="MeterNumb" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Material" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="InstalDate" Type="DateTime" Precision="0" />
+          <Property Name="Max_Id" Type="Int64" />
+          <Property Name="geom" Type="Geometry" />
+        </EntityType>
+        <EntityType Name="vwStands2Valves">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="valveId" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="standid" Type="Int64" />
+          <Property Name="ActiveFlag" Type="Int64" />
+          <Property Name="Enabled" Type="Int64" />
+          <Property Name="ManagedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="AccNumber" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="AccHolder" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="ServiceTyp" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="MeterNumb" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Material" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="InstalDate" Type="DateTime" Precision="0" />
+          <Property Name="Max_Id" Type="Int64" />
+          <Property Name="geom" Type="Geometry" />
+          <Property Name="valveId" Type="Int32" Nullable="false" />
+          <Property Name="Point" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="WaterAuditModelStoreContainer" CdmEntityContainer="WaterAuditEntities">
+          <EntitySetMapping Name="wHydrants">
+            <EntityTypeMapping TypeName="WaterAuditModel.wHydrant">
+              <MappingFragment StoreEntitySet="wHydrants">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="hydrant" ColumnName="hydrant" />
+                <ScalarProperty Name="lat" ColumnName="lat" />
+                <ScalarProperty Name="long" ColumnName="long" />
+                <ScalarProperty Name="geom" ColumnName="geom" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="wLiteralLines">
+            <EntityTypeMapping TypeName="WaterAuditModel.wLiteralLine">
+              <MappingFragment StoreEntitySet="wLiteralLine">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Enabled" ColumnName="Enabled" />
+                <ScalarProperty Name="ActiveFlag" ColumnName="ActiveFlag" />
+                <ScalarProperty Name="ManagedBy" ColumnName="ManagedBy" />
+                <ScalarProperty Name="OwnedBy" ColumnName="OwnedBy" />
+                <ScalarProperty Name="LineType" ColumnName="LineType" />
+                <ScalarProperty Name="Material" ColumnName="Material" />
+                <ScalarProperty Name="FacilityId" ColumnName="FacilityId" />
+                <ScalarProperty Name="InstalDate" ColumnName="InstalDate" />
+                <ScalarProperty Name="Diameter" ColumnName="Diameter" />
+                <ScalarProperty Name="LastUpdate" ColumnName="LastUpdate" />
+                <ScalarProperty Name="AccHolder" ColumnName="AccHolder" />
+                <ScalarProperty Name="ServiceTyp" ColumnName="ServiceTyp" />
+                <ScalarProperty Name="MeterNumb" ColumnName="MeterNumb" />
+                <ScalarProperty Name="Max_Id" ColumnName="Max_Id" />
+                <ScalarProperty Name="geom" ColumnName="geom" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="wServiceConnections">
+            <EntityTypeMapping TypeName="WaterAuditModel.wServiceConnection">
+              <MappingFragment StoreEntitySet="wServiceConnection">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Enabled" ColumnName="Enabled" />
+                <ScalarProperty Name="ActiveFlag" ColumnName="ActiveFlag" />
+                <ScalarProperty Name="OwnedBy" ColumnName="OwnedBy" />
+                <ScalarProperty Name="ManagedBy" ColumnName="ManagedBy" />
+                <ScalarProperty Name="AccNumber" ColumnName="AccNumber" />
+                <ScalarProperty Name="AccHolder" ColumnName="AccHolder" />
+                <ScalarProperty Name="ServiceTyp" ColumnName="ServiceTyp" />
+                <ScalarProperty Name="MeterNumb" ColumnName="MeterNumb" />
+                <ScalarProperty Name="Shape_Leng" ColumnName="Shape_Leng" />
+                <ScalarProperty Name="Shape_Area" ColumnName="Shape_Area" />
+                <ScalarProperty Name="standid" ColumnName="standid" />
+                <ScalarProperty Name="FacilityId" ColumnName="FacilityId" />
+                <ScalarProperty Name="lat" ColumnName="lat" />
+                <ScalarProperty Name="long" ColumnName="long" />
+                <ScalarProperty Name="geom" ColumnName="geom" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="wValves">
+            <EntityTypeMapping TypeName="WaterAuditModel.wValf">
+              <MappingFragment StoreEntitySet="wValves">
+                <ScalarProperty Name="fromateria" ColumnName="fromateria" />
+                <ScalarProperty Name="toaterial" ColumnName="toaterial" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Point" ColumnName="Point" />
+                <ScalarProperty Name="latitude" ColumnName="latitude" />
+                <ScalarProperty Name="longitude" ColumnName="longitude" />
+                <ScalarProperty Name="Height" ColumnName="Height" />
+                <ScalarProperty Name="size" ColumnName="size" />
+                <ScalarProperty Name="geom" ColumnName="geom" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="wWindsorParks">
+            <EntityTypeMapping TypeName="WaterAuditModel.wWindsorPark">
+              <MappingFragment StoreEntitySet="wWindsorPark">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="OBJECTID" ColumnName="OBJECTID" />
+                <ScalarProperty Name="Shape_Leng" ColumnName="Shape_Leng" />
+                <ScalarProperty Name="Shape_Area" ColumnName="Shape_Area" />
+                <ScalarProperty Name="standid" ColumnName="standid" />
+                <ScalarProperty Name="standnum" ColumnName="standnum" />
+                <ScalarProperty Name="geom" ColumnName="geom" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwAffectedHouses">
+            <EntityTypeMapping TypeName="WaterAuditModel.vwAffectedHous">
+              <MappingFragment StoreEntitySet="vwAffectedHouses">
+                <ScalarProperty Name="geom" ColumnName="geom" />
+                <ScalarProperty Name="standtype" ColumnName="standtype" />
+                <ScalarProperty Name="townshipid" ColumnName="townshipid" />
+                <ScalarProperty Name="cityid" ColumnName="cityid" />
+                <ScalarProperty Name="standid" ColumnName="standid" />
+                <ScalarProperty Name="pipeid" ColumnName="pipeid" />
+                <ScalarProperty Name="endvalveid" ColumnName="endvalveid" />
+                <ScalarProperty Name="startvalveid" ColumnName="startvalveid" />
+                <ScalarProperty Name="id_i" ColumnName="id_i" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwStandConLiterals">
+            <EntityTypeMapping TypeName="WaterAuditModel.vwStandConLiteral">
+              <MappingFragment StoreEntitySet="vwStandConLiteral">
+                <ScalarProperty Name="geom" ColumnName="geom" />
+                <ScalarProperty Name="Max_Id" ColumnName="Max_Id" />
+                <ScalarProperty Name="InstalDate" ColumnName="InstalDate" />
+                <ScalarProperty Name="Material" ColumnName="Material" />
+                <ScalarProperty Name="MeterNumb" ColumnName="MeterNumb" />
+                <ScalarProperty Name="ServiceTyp" ColumnName="ServiceTyp" />
+                <ScalarProperty Name="AccHolder" ColumnName="AccHolder" />
+                <ScalarProperty Name="AccNumber" ColumnName="AccNumber" />
+                <ScalarProperty Name="ManagedBy" ColumnName="ManagedBy" />
+                <ScalarProperty Name="Enabled" ColumnName="Enabled" />
+                <ScalarProperty Name="ActiveFlag" ColumnName="ActiveFlag" />
+                <ScalarProperty Name="standid" ColumnName="standid" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwStands2Valves">
+            <EntityTypeMapping TypeName="WaterAuditModel.vwStands2Valves">
+              <MappingFragment StoreEntitySet="vwStands2Valves">
+                <ScalarProperty Name="Point" ColumnName="Point" />
+                <ScalarProperty Name="valveId" ColumnName="valveId" />
+                <ScalarProperty Name="geom" ColumnName="geom" />
+                <ScalarProperty Name="Max_Id" ColumnName="Max_Id" />
+                <ScalarProperty Name="InstalDate" ColumnName="InstalDate" />
+                <ScalarProperty Name="Material" ColumnName="Material" />
+                <ScalarProperty Name="MeterNumb" ColumnName="MeterNumb" />
+                <ScalarProperty Name="ServiceTyp" ColumnName="ServiceTyp" />
+                <ScalarProperty Name="AccHolder" ColumnName="AccHolder" />
+                <ScalarProperty Name="AccNumber" ColumnName="AccNumber" />
+                <ScalarProperty Name="ManagedBy" ColumnName="ManagedBy" />
+                <ScalarProperty Name="Enabled" ColumnName="Enabled" />
+                <ScalarProperty Name="ActiveFlag" ColumnName="ActiveFlag" />
+                <ScalarProperty Name="standid" ColumnName="standid" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

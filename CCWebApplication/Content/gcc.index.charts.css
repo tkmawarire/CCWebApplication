@@ -1,0 +1,20 @@
+﻿            .text {
+            font: 12px sans-serif;
+        }
+
+        #statspanel svg {
+            display: block;
+            float: left;
+            height: 300px !important;
+            width: 300px !important;
+            padding-left: 0 !important;
+        }
+
+        .nvd3.nv-pie.nv-chart-donut2 .nv-pie-title {
+            fill: gray;
+        }
+
+        .nvd3.nv-pie.nv-chart-donut1 .nv-pie-title {
+            opacity: 0.7;
+            fill: green;
+        }

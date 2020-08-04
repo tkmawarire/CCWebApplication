@@ -1,0 +1,85 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <title>@ViewBag.Title - GCC Reporting</title>
+    @Styles.Render("~/Content/heatmap")
+    @Scripts.Render("~/bundles/modernizr")
+    <!--This bundle was moved by the Telerik VS Extensions for compatibility reasons-->
+    @Scripts.Render("~/bundles/jquery")
+    <script src="https://api.tiles.mapbox.com/mapbox-gl-js/v0.17.0/mapbox-gl.js"></script>
+    <link href="https://api.tiles.mapbox.com/mapbox-gl-js/v0.17.0/mapbox-gl.css" rel="stylesheet" />
+
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("GCC GIS", "Index", "GccHome", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Finance<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li>@Html.ActionLink("Property Status", "Finance", "GccHome")</li>
+                            <li role="separator" class="divider"></li>
+                            <li>@Html.ActionLink("Amount Owing Stats", "FinanceVisualization", "GccHome")</li>
+                            <li role="separator" class="divider"></li>
+                            <li>@Html.ActionLink("Coming Soon", "Index", "GccHome")</li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="#">Age Analysis</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="#">Custom Analysis</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Engineering<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li>@Html.ActionLink("Leakage Data", "LeakageCharts", "Leakages")</li>
+                            <li>@Html.ActionLink("Heatmap", "LeakageHeatMap", "Leakages")</li>
+                            <li>@Html.ActionLink("Leakage Records", "Index", "LeakageView")</li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="@Url.Action("LeakageCharts", "Leakages")">Download Report</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="http://localhost/esfrs/MapClient/CitizenDashboard">Report a Fault</a></li>
+                            @*<li>@Html.ActionLink("Old Portal", "CouncilDashboard", "Leakages")</li>*@
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Service Reporting<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="http://localhost/esfrs/MapClient/CitizenDashboard">Report a Fault</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="http://localhost/esfrs/MapClient/SearchFaults">Search a Fault</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="http://localhost/esfrs/Home/Contact">Search a Fault</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="http://localhost/esfrs/MapClient/SupervisorDashboard">Supervisor Dashboard</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="http://localhost/esfrs/MapClient/FeildTeamDashboard">Field Team Dashboard</a></li>
+                        </ul>
+                    </li>
+                    <li>@Html.ActionLink("Public", "Index", "GccHome")</li>
+                    <li>@Html.ActionLink("About", "About", "Home")</li>
+                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                </ul>
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
+    </div>
+    @RenderBody()
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

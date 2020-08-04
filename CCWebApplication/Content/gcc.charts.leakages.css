@@ -1,0 +1,35 @@
+﻿        .text {
+            font: 12px sans-serif;
+        }
+
+        #pieCharts svg {
+            display: block;
+            float: left;
+            height: 400px !important;
+            width: 400px !important;
+            padding-left: 0 !important;
+        }
+        #townshipsChart svg {
+            display: block;
+            float: left;
+            height: 600px !important;
+            width: 100% !important;
+            padding-left: 0 !important; 
+        }
+        #histogramChart svg {
+            display: block;
+            float: left;
+            height: 600px !important;
+            width: 100% !important;
+            padding-left: 0 !important;  
+        }
+
+
+        .nvd3.nv-pie.nv-chart-donut2 .nv-pie-title {
+            fill: gray;
+        }
+
+        .nvd3.nv-pie.nv-chart-donut1 .nv-pie-title {
+            opacity: 0.7;
+            fill: green;
+        }

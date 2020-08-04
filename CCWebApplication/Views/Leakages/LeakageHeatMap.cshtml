@@ -1,0 +1,103 @@
+﻿
+@{
+    ViewBag.Title = "LeakageHeatMap";
+    Layout = "~/Views/Shared/_HeatMapLayout.cshtml";
+}
+<style>
+    .mapboxgl-ctrl-top-right div {
+        padding-top: 50px;
+    }
+
+</style>
+<div id="map"></div>
+<script>
+    var getLeakages = "@Url.Action("GetLeakages","GetGeojsonData")";
+        mapboxgl.accessToken = 'pk.eyJ1IjoidGFzaGFhNzgiLCJhIjoiY2lpYWEyNGthMDAxbXVsbHp0cG13ZGJmcSJ9.elYnA87kBzApKdekiM60Yw';
+        var map = new mapboxgl.Map({
+            container: 'map',
+            style: 'mapbox://styles/tashaa78/cink641xt022ad5m3kpthmo2r',
+            center: [29.818783, -19.456608],
+            zoom: 12,
+            preserveDrawingBuffer: true
+        });
+        // Add zoom and rotation controls to the map.
+        var mapnav = (new mapboxgl.Navigation(
+        {
+         //position: "bottomright"
+        }));
+        map.addControl(mapnav);
+        var getData = {};
+        getData.url = getLeakages;
+        getData.type = "GET";
+        getData.dataType = "json";
+        getData.contentType = "application/json; charset=utf-8"; //define a contentType of your request
+        getData.cache = false; //avoid caching results
+        getData.data = {}; // here we can pass arguments
+        getData.traditional = true;
+        getData.success = function (result) {
+
+            map.on('load', function () {
+
+                // Add a new source from our GeoJSON data and set the
+                // 'cluster' option to true.
+                map.addSource("faults", {
+                    type: "geojson",
+                    data: {
+                        "type": "FeatureCollection",
+                        "features": result
+                    },
+                    cluster: true,
+                    clusterMaxZoom: 15, // Max zoom to cluster points on
+                    clusterRadius: 20 // Use small cluster radius for the heatmap look
+                });
+
+                // Use the earthquakes source to create four layers:
+                // three for each cluster category, and one for non-clustered markers
+
+                // Each point range gets a different fill color.
+                var layers = [
+                    [0, 'green'],
+                    [3, 'orange'],
+                    [7, 'red']
+                ];
+
+                layers.forEach(function (layer, i) {
+                    map.addLayer({
+                        "id": "cluster-" + i,
+                        "type": "circle",
+                        "source": "faults",
+                        "paint": {
+                            "circle-color": layer[1],
+                            "circle-radius": 70,
+                            "circle-blur": 1 // blur the circles to get a heatmap look
+                        },
+                        "filter": i === layers.length - 1 ?
+                            [">=", "point_count", layer[0]] :
+                            ["all",
+                                [">=", "point_count", layer[0]],
+                                ["<", "point_count", layers[i + 1][0]]]
+                    }, 'waterway-label');
+                });
+
+                map.addLayer({
+                    "id": "non-cluster-markers",
+                    "type": "circle",
+                    "source": "faults",
+                    "paint": {
+                        "circle-color": 'rgba(0,255,0,0.5)',
+                        "circle-radius": 20,
+                        "circle-blur": 1
+                    },
+                    "filter": ["!=", "cluster", true]
+                }, 'waterway-label');
+            });
+
+        };
+        getData.error = function (jqXHR, errStatus, err) {
+            console.log("Sorry we can't complete the Request:-" + " " + err + ".");
+            console.log("Cant call heatmap data!!!!!!!!! ");
+        };
+        $.ajax(getData);
+</script>
+
+
